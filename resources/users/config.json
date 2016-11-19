@@ -1,0 +1,13 @@
+{
+	"type": "UserCollection",
+	"properties": {
+		"role": {
+			"name": "role",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "role",
+			"order": 0
+		}
+	}
+}

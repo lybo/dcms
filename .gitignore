@@ -1,7 +1,18 @@
-# Logs
-logs
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+*.swp
+*.swo
 *.log
 npm-debug.log*
+
+node_modules/
+documentation/
+bower_components/
 
 # Runtime data
 pids

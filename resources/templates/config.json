@@ -1,0 +1,53 @@
+{
+	"type": "Collection",
+	"properties": {
+		"title": {
+			"name": "title",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "title",
+			"order": 0
+		},
+		"description": {
+			"name": "description",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "description",
+			"order": 1
+		},
+		"fields": {
+			"name": "fields",
+			"type": "array",
+			"typeLabel": "array",
+			"required": false,
+			"id": "fields",
+			"order": 2
+		},
+		"allowInsert": {
+			"name": "allowInsert",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "allowInsert",
+			"order": 3
+		},
+		"allowUpdate": {
+			"name": "allowUpdate",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "allowUpdate",
+			"order": 4
+		},
+		"allowDelete": {
+			"name": "allowDelete",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "allowDelete",
+			"order": 5
+		}
+	}
+}

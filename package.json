@@ -1,0 +1,16 @@
+{
+  "name": "dcms",
+  "version": "1.0.0",
+  "description": "## DCMS",
+  "main": "index.js",
+  "dependencies": {
+    "deployd": "^0.8.9",
+    "dpd-fileupload": "0.0.17"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "GPL-3.0+"
+}

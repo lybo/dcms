@@ -1,0 +1,61 @@
+{
+  "name": "planking",
+  "version": "0.0.0",
+  "description": "Planking",
+  "scripts": {
+    "start": "node server.js",
+    "build": "webpack --config webpack.config.production.js",
+    "test": "NODE_ENV=test mocha --recursive --compilers js:babel-core/register --require ./test/setup.js",
+    "test:watch": "npm test -- --watch",
+    "wiki": "./node_modules/.bin/jsdoc index.js -c ./jsdoc.json -r"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rackt/redux.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rackt/redux/issues"
+  },
+  "homepage": "http://rackt.github.io/redux",
+  "dependencies": {
+    "classnames": "^2.1.2",
+    "react": "^15.2.1",
+    "react-addons-css-transition-group": "^15.2.1",
+    "react-dom": "^15.2.1",
+    "react-redux": "^4.0.4",
+    "react-sortable-hoc": "^0.1.0",
+    "redux": "^3.0.0",
+    "redux-router-director": "^1.0.0",
+    "redux-thunk": "^1.0.3"
+  },
+  "devDependencies": {
+    "autoprefixer-loader": "^3.1.0",
+    "babel-core": "^5.6.18",
+    "babel-loader": "^5.1.4",
+    "babel-plugin-react-transform": "^1.1.0",
+    "css-loader": "^0.23.0",
+    "deep-freeze": "0.0.1",
+    "expect": "^1.8.0",
+    "express": "^4.13.3",
+    "jquery": "^2.2.4",
+    "jsdoc": "^3.4.0",
+    "jsdom": "^5.6.1",
+    "less": "^2.5.3",
+    "less-loader": "^2.2.2",
+    "mocha": "^2.2.5",
+    "moment": "^2.14.1",
+    "node-libs-browser": "^0.5.2",
+    "raw-loader": "^0.5.1",
+    "react-addons-test-utils": "^0.14.0",
+    "react-redux": "^4.0.4",
+    "react-transform-hmr": "^1.0.0",
+    "redux-devtools": "^3.0.0",
+    "redux-devtools-dock-monitor": "^1.0.1",
+    "redux-devtools-log-monitor": "^1.0.1",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.9.11",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-hot-middleware": "^2.2.0"
+  }
+}

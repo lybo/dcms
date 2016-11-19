@@ -1,0 +1,21 @@
+{
+	"type": "Collection",
+	"properties": {
+		"quote": {
+			"name": "quote",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "quote",
+			"order": 0
+		},
+		"orderStatus": {
+			"name": "orderStatus",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "orderStatus",
+			"order": 1
+		}
+	}
+}

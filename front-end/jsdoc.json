@@ -1,0 +1,19 @@
+{
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc","closure"]
+    },
+    "source": {
+        "include": ["index.js", "actions", "components", "containers", "middlewares", "services", "utils"],
+        "exclude": ["node_modules", "out", "public", "store", "test"],
+        "includePattern": ".+\\.js(doc)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "plugins": [],
+    "opts": {
+        "template": "templates/default",  
+        "encoding": "utf8",              
+        "destination": "./documentation/",        
+        "recurse": true               
+    }
+}

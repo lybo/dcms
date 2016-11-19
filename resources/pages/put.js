@@ -1,0 +1,1 @@
+emit('pages:update', this);
