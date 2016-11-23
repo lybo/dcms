@@ -8,7 +8,7 @@ var server = deployd({
     db: {
         host: 'localhost',
         port: 27017,
-        name: 'smokestack-cms',
+        name: 'cms',
         // credentials: {
         //     username: 'username',
         //     password: 'password'
