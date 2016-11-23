@@ -9,7 +9,7 @@ webpack --config webpack.config.production.js
 ```
 
 #### Create a empty mongod 
-smokestack-cms
+cms
 
 #### Run server
 ```
