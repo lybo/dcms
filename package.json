@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "deployd": "^0.8.9",
-    "dpd-fileupload": "0.0.17"
+    "dpd-fileupload": "0.0.17",
+    "dpd-passport": "^0.3.6"
   },
   "devDependencies": {},
   "scripts": {

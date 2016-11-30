@@ -1,0 +1,13 @@
+{
+	"type": "Collection",
+	"properties": {
+		"hasAdmin": {
+			"name": "hasAdmin",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": false,
+			"id": "hasAdmin",
+			"order": 0
+		}
+	}
+}

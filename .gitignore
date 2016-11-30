@@ -13,6 +13,7 @@ npm-debug.log*
 node_modules/
 documentation/
 bower_components/
+data/
 
 # Runtime data
 pids

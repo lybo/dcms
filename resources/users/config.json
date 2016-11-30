@@ -8,6 +8,38 @@
 			"required": true,
 			"id": "role",
 			"order": 0
+		},
+		"socialAccount": {
+			"name": "socialAccount",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "socialAccount",
+			"order": 1
+		},
+		"socialAccountId": {
+			"name": "socialAccountId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "socialAccountId",
+			"order": 2
+		},
+		"profile": {
+			"name": "profile",
+			"type": "object",
+			"typeLabel": "object",
+			"required": false,
+			"id": "profile",
+			"order": 3
+		},
+		"name": {
+			"name": "name",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "name",
+			"order": 4
 		}
 	}
 }
