@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Planking",
   "scripts": {
-    "start": "node server.js",
+    "start": "NODE_ENV=development node server.js",
     "build": "webpack --config webpack.config.production.js",
     "test": "NODE_ENV=test mocha --recursive --compilers js:babel-core/register --require ./test/setup.js",
     "test:watch": "npm test -- --watch",

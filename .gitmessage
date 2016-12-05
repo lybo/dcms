@@ -1,0 +1,13 @@
+<Title>
+
+<Description: what did you change and why>
+
+Verification:
+* <Bullet list of verification tests>
+
+Risk metrics:
+* <Bullet list of features which would be affected from that commit message>
+
+Test strategy:
+* <Bullet list of measures taken to test the changes made in this commit>
+
