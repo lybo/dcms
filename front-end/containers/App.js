@@ -5,6 +5,7 @@ import Login from './Login'
 import Dashboard from './Dashboard'
 import Users from './Users'
 import UserForm from './UserForm'
+import Profile from './Profile'
 import Pages from './Pages'
 import PageForm from './PageForm'
 import Templates from './Templates'
@@ -37,6 +38,9 @@ const RoutePages = ({
             </Router>
             <Router pattern="/users/:userId" middlewares={[auth]}>
                 <UserForm />
+            </Router>
+            <Router pattern="/profile" middlewares={[auth]}>
+                <Profile />
             </Router>
             <Router pattern="/pages" middlewares={[auth]}>
                 <Pages />

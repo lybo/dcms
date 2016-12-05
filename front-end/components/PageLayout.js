@@ -26,11 +26,11 @@ class PageLayout extends React.Component {
                     <footer className="pull-left footer">
                         <div className="col-md-12">
                             <hr className="divider" /> {'Copyright © 2015 '}
-                            <Link url={ 'http://www.smokestack.se'}>smokestack</Link>
+                            <Link url={ 'http://'}>dcms</Link>
                         </div>
                     </footer>
                 </div>
-            </div>        
+            </div>
          );
     }
 }

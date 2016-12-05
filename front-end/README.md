@@ -4,12 +4,17 @@ This README would normally document whatever steps are necessary to get your app
 
 ### App ###
 
-https://radiant-fire-4950.firebaseapp.com/
+dpd keygen
+dpd showkey
 
 ### How do I get set up? ###
 
-* npm install
-* npm start
+* > npm install
+* > node index.js
+
+* > cd front-end
+* > npm install
+* > npm start
 
 ### How do I run tests? ###
 * npm run-script test:watch
@@ -18,4 +23,4 @@ https://radiant-fire-4950.firebaseapp.com/
 * npm run-script build
 
 ### How do I deploy? ###
-* firebase deploy
+* 

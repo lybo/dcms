@@ -1,24 +1,13 @@
-import SectionUserForm from '../components/SectionUserForm'
+import SectionProfile from '../components/SectionProfile'
 import { connect } from 'react-redux'
 import { fetchLogout, fetchPopulateUsers, fetchAddUser, fetchUpdateUser } from '../actions/user'
 
 export default connect(
     (state) => {
-        const { userId } = state.router.params;
-        const user = userId !== '0' ?
-            state.users.find((userItem) => userItem.id === userId) :
-            {
-                id: '0',
-                email: '',
-                password: '',
-                role: ''
-            };
-
         return {
             router: state.router,
             auth_user: state.auth_user,
             users: state.users,
-            user,
             request: state.requests.user
         };
     },
@@ -38,4 +27,4 @@ export default connect(
             }
         }
     }
-)(SectionUserForm);
+)(SectionProfile);

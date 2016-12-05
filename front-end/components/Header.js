@@ -23,7 +23,7 @@ class Header extends React.Component {
             onClickLogout();
             redirect('/login');
         }
-      
+
         return (
             <nav className="navbar navbar-default navbar-static-top">
                 <div className="container-fluid">
@@ -37,7 +37,7 @@ class Header extends React.Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <Link url={'/dashboard'} className="navbar-brand"> Smokestack TV - admin </Link>
+                        <Link url={'/dashboard'} className="navbar-brand"> DCMS </Link>
                     </div>
                     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul className="nav navbar-nav navbar-right">
@@ -52,13 +52,13 @@ class Header extends React.Component {
                                 <ul className="dropdown-menu" role="menu">
                                     <li className="dropdown-header">SETTINGS</li>
                                     <li className="">
-                                        <Link url={'/dashboard'} > Administrator </Link>
+                                        <Link url={`/profile`}>Profile</Link>
                                     </li>
                                     <li className="">
-                                        <Link url={'/dashboard'} > Administrator </Link>
+                                        <Link url={'/dashboard'}> Administrator </Link>
                                     </li>
                                     <li className="">
-                                        <Link url={'/dashboard'} > Administrator </Link>
+                                        <Link url={'/dashboard'}> Administrator</Link>
                                     </li>
                                     <li className="divider"></li>
                                     <li><Link url={'/logout'} onClick={_onClickLogout}>Logout</Link></li>
