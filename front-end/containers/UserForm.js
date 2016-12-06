@@ -1,4 +1,4 @@
-import SectionUserForm from '../components/SectionUserForm'
+import SectionUserForm from '../components/SectionUserForm/'
 import { connect } from 'react-redux'
 import { fetchLogout, fetchPopulateUsers, fetchAddUser, fetchUpdateUser } from '../actions/user'
 

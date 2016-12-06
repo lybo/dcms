@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import Link from './Link'
-import Header from './Header'
-import Sidemenu from './Sidemenu'
+import Link from '../Link/'
+import Header from '../Header/'
+import Sidemenu from '../Sidemenu/'
 import { redirect } from 'redux-router-director'
-import '!style!css!less!./PageLayout.less'
+import '!style!css!less!./style.less'
 
 class PageLayout extends React.Component {
     constructor(props) {

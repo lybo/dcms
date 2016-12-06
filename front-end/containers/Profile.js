@@ -1,4 +1,4 @@
-import SectionProfile from '../components/SectionProfile'
+import SectionProfile from '../components/SectionProfile/'
 import { connect } from 'react-redux'
 import { fetchLogout, fetchPopulateUsers, fetchAddUser, fetchUpdateUser } from '../actions/user'
 

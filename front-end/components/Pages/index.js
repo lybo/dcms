@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { USER_ROLE } from '../constants/ActionTypes';
-import PageLayout from './PageLayout'
-import Link from './Link'
+import { USER_ROLE } from '../../constants/ActionTypes';
+import PageLayout from '../PageLayout/'
+import Link from '../Link/'
 import { redirect } from 'redux-router-director'
-import '!style!css!less!./Pages.less'
+import '!style!css!less!./style.less'
 import { SortableContainer, SortableElement, SortableHandle, arrayMove } from 'react-sortable-hoc';
 
 const DragHandle = SortableHandle(() => <span className="glyphicon glyphicon-menu-hamburger sortable-handle"></span>);
@@ -46,15 +46,15 @@ const SortableItem = SortableElement(({
                 <small className="small list-wrapper__role">{` - ${template.title} `}</small>
             ) : (
                 ''
-            )} 
+            )}
             {page.published ? (
                 <span className="label label-success">Published</span>
             ) : (
                 <span className="label label-danger">Unpublished</span>
             )}
-            {/*<small className="small list-wrapper__role">{page.zone}</small>*/} 
+            {/*<small className="small list-wrapper__role">{page.zone}</small>*/}
             {/*
-            {startDate} 
+            {startDate}
             <small className="small list-wrapper__role"> to </small>
             {endDate}
             */}
@@ -150,7 +150,7 @@ class Pages extends React.Component {
             const { onDelete } = this.props;
             onDelete && onDelete(this.state.page.id);
             this.setState({
-                page: null 
+                page: null
             });
         }
     }
@@ -201,7 +201,7 @@ class Pages extends React.Component {
                                             </div>
                                         </div>
                                         <div className="panel-body">
-                                            <SortableComponent 
+                                            <SortableComponent
                                                 onSort={onSort}
                                                 pages={pages.sort((a, b) => b.zIndex - a.zIndex)}
                                                 onDelete={this.onDelete.bind(this)}
@@ -221,7 +221,7 @@ class Pages extends React.Component {
                         </div>
 
                     </div>
-            </PageLayout>        
+            </PageLayout>
         );
     }
 }

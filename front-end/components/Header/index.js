@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import Link from './Link'
+import Link from '../Link/'
 import { redirect } from 'redux-router-director'
-import '!style!css!less!./Login.less'
+import '!style!css!less!./style.less'
 
 class Header extends React.Component {
     constructor(props) {

@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import Link from './Link'
-import Spinner from './Spinner'
+import Link from '../Link/'
+import Spinner from '../Spinner/'
 import { redirect } from 'redux-router-director'
-import '!style!css!less!./FileManager.less'
-import { DEV_HOST, PROD_HOST } from '../constants/ActionTypes'
+import '!style!css!less!./style.less'
+import { DEV_HOST, PROD_HOST } from '../../constants/ActionTypes'
 
 const HOST = __DEV_HOST__ ? `${DEV_HOST}:5000` : `${PROD_HOST}:5000`;
 
@@ -11,7 +11,7 @@ class FileManager extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            files: []            
+            files: []
         };
 
     }
@@ -44,7 +44,7 @@ class FileManager extends React.Component {
         const fd = new FormData()
         const subdir = '';
         fd.append('uploadedFile', file)
-        const appendFiles = this.appendFiles.bind(this); 
+        const appendFiles = this.appendFiles.bind(this);
         const xhr = new XMLHttpRequest();
         xhr.open('POST', `${HOST}/fileupload?subdir=${subdir}&uniqueFilename=true`);
         xhr.onload = function() {
@@ -76,7 +76,7 @@ class FileManager extends React.Component {
             evt.preventDefault();
             dpd.fileupload.del(id, (result, err) => {
                 if (err) alert(err);
-                
+
                 this.setState({
                     files: this.state.files.filter((file) => file.id !== id )
                 });
@@ -96,17 +96,17 @@ class FileManager extends React.Component {
     }
 
     render() {
-      
+
         return (
             <div className="row" >
                 <div className="col-md-12">
-                    
+
                     <div className="panel panel-default">
                         <div className="panel-heading">
                             <h3 className="panel-title">Page</h3>
                         </div>
                         <div className="panel-body">
-                            <div className="form-area">  
+                            <div className="form-area">
                                 <div role="form" className="clearfix" >
                                     <div className="form-group">
                                         <label htmlFor="image">Image</label>
@@ -135,7 +135,7 @@ class FileManager extends React.Component {
                     </div>
 
                 </div>
-            </div>        
+            </div>
         );
     }
 }

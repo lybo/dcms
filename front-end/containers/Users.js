@@ -1,4 +1,4 @@
-import Users from '../components/Users'
+import Users from '../components/Users/'
 import { connect } from 'react-redux'
 import { fetchLogout,  fetchPopulateUsers, fetchDeleteUser } from '../actions/user'
 
@@ -12,15 +12,15 @@ export default connect(
     },
     (dispatch) => {
         return {
-            onLoadUsers: () => { 
+            onLoadUsers: () => {
                 dispatch(fetchPopulateUsers());
             },
-            onDelete: (userId) => { 
+            onDelete: (userId) => {
                 dispatch(fetchDeleteUser(userId));
             },
-            onClickLogout: () => { 
+            onClickLogout: () => {
                 dispatch(fetchLogout());
             }
         }
     }
-)(Users); 
+)(Users);

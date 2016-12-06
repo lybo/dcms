@@ -10,9 +10,9 @@ export default connect(
     },
     (dispatch) => {
         return {
-            onClickLogout: () => { 
+            onClickLogout: () => {
                 dispatch(fetchLogout());
             }
         }
     }
-)(Dashboard); 
+)(Dashboard);
