@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import PageLayout from './PageLayout'
-import Link from './Link'
+import PageLayout from '../PageLayout'
+import Link from '../Link/'
 import { redirect } from 'redux-router-director'
-import '!style!css!less!./Users.less'
+import '!style!css!less!./style.less'
 
 class Users extends React.Component {
     constructor(props) {
@@ -39,7 +39,7 @@ class Users extends React.Component {
             const { onDelete } = this.props;
             onDelete && onDelete(this.state.user.id);
             this.setState({
-                user: null 
+                user: null
             });
         }
     }
@@ -117,7 +117,7 @@ class Users extends React.Component {
                     </div>
                 </div>
 
-            </PageLayout>        
+            </PageLayout>
         );
     }
 }

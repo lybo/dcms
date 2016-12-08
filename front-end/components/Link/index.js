@@ -6,7 +6,7 @@ class Link extends Component {
         super(props);
         this.onClick = this.onClick.bind(this);
     }
-    
+
     onClick(evt) {
         evt.stopPropagation();
         evt.preventDefault();
@@ -21,7 +21,7 @@ class Link extends Component {
     render() {
         const {url, className, children} = this.props;
         return (
-            <a href={url} className={className} onClick={this.onClick}>{children}</a>       
+            <a href={url} className={className} onClick={this.onClick}>{children}</a>
         );
     }
 }

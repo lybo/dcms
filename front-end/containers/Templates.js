@@ -1,4 +1,4 @@
-import Templates from '../components/Templates'
+import Templates from '../components/Templates/'
 import { connect } from 'react-redux'
 import { fetchLogout } from '../actions/user'
 import { fetchPopulateTemplates, fetchDeleteTemplate } from '../actions/template'
@@ -13,15 +13,15 @@ export default connect(
     },
     (dispatch) => {
         return {
-            onLoadTemplates: () => { 
+            onLoadTemplates: () => {
                 dispatch(fetchPopulateTemplates());
             },
-            onDelete: (templateId) => { 
+            onDelete: (templateId) => {
                 dispatch(fetchDeleteTemplate(templateId));
             },
-            onClickLogout: () => { 
+            onClickLogout: () => {
                 dispatch(fetchLogout());
             }
         }
     }
-)(Templates); 
+)(Templates);

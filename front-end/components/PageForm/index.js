@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-import PageLayout from './PageLayout'
-import Spinner from './Spinner'
-import Input from './form/Input'
+import PageLayout from '../PageLayout/'
+import Spinner from '../Spinner/'
+import Input from '../form/Input'
 import { redirect } from 'redux-router-director'
 import moment from 'moment';
-import '!style!css!less!./PageForm.less'
-import { DEV_HOST, PROD_HOST } from '../constants/ActionTypes'
+import '!style!css!less!./style.less'
+import { DEV_HOST, PROD_HOST } from '../../constants/ActionTypes'
 
 
 const DATE_FORMAT = 'DD/MM/YYYY';
@@ -34,7 +34,7 @@ class PageForm extends React.Component {
         // $('#input-start-date').datetimepicker({
         //     format: DATE_FORMAT,
         //     defaultDate: parseInt(this.state.publicationStartDate) ?
-        //         moment.unix(parseInt(this.state.publicationStartDate)) : 
+        //         moment.unix(parseInt(this.state.publicationStartDate)) :
         //         ''
         // });
         // $('#input-end-date').datetimepicker({
@@ -56,7 +56,7 @@ class PageForm extends React.Component {
     }
 
     onSubmit(evt) {
-        evt.preventDefault();   
+        evt.preventDefault();
     }
 
     onSave(goToList) {
@@ -67,7 +67,7 @@ class PageForm extends React.Component {
 
             let content = {};
             this.state.selectedTemplate.fields.forEach((field) => {
-                content[field.name] = this.templateFields[field.name]; 
+                content[field.name] = this.templateFields[field.name];
             });
 
             onSave({
@@ -93,7 +93,7 @@ class PageForm extends React.Component {
         return (evt) => {
             const selectedTemplate = templates.find(item => item.id === evt.target.value) || null;
             this.setState({
-                selectedTemplate  
+                selectedTemplate
             });
         };
     }
@@ -106,12 +106,12 @@ class PageForm extends React.Component {
             <div>
                 {selectedTemplate.fields.map((field, i) => {
                     return (
-                        <Input key={field.name + i} 
+                        <Input key={field.name + i}
                             form={this.templateFields}
                             value={page.content[field.name] || null}
                             type={field.input}
-                            label={field.label} 
-                            name={field.name} 
+                            label={field.label}
+                            name={field.name}
                             defaultValue={field.defaultValue} />
                     );
                 })}
@@ -127,7 +127,7 @@ class PageForm extends React.Component {
                     <h3 className="panel-title">Page</h3>
                 </div>
                 <div className="panel-body">
-                    <div className="form-area">  
+                    <div className="form-area">
                         <form role="form" className="clearfix" onSubmit={this.onSubmit.bind(this)}>
 
                             <div className="form-group">
@@ -157,11 +157,11 @@ class PageForm extends React.Component {
 */}
                             <div className="form-group">
                                 <label htmlFor="templateId">Template</label>
-                                <select ref="templateId" 
+                                <select ref="templateId"
                                         onChange={this.onChangeTemplate()}
-                                        ref={(ref) => this.templateId = ref} 
-                                        defaultValue={page.templateId} 
-                                        className="form-control" 
+                                        ref={(ref) => this.templateId = ref}
+                                        defaultValue={page.templateId}
+                                        className="form-control"
                                         id="templateId">
                                     <option value="">Select template</option>
 
@@ -215,12 +215,12 @@ class PageForm extends React.Component {
                 </div>
             </div>
 
-        ); 
-        
+        );
+
         return (
             <PageLayout router={router} onClickLogout={onClickLogout} auth_user={auth_user} >
                 {Form}
-            </PageLayout>        
+            </PageLayout>
          );
     }
 }

@@ -1,4 +1,4 @@
-import PageForm from '../components/PageForm'
+import PageForm from '../components/PageForm/'
 import { connect } from 'react-redux'
 import { fetchLogout } from '../actions/user'
 import { fetchPopulatePages, fetchAddPage, fetchUpdatePage } from '../actions/page'
@@ -6,8 +6,8 @@ import { fetchPopulatePages, fetchAddPage, fetchUpdatePage } from '../actions/pa
 export default connect(
     (state) => {
         const { pageId } = state.router.params;
-        const page = pageId && pageId !== '0' ? 
-            state.pages.find((pageItem) => pageItem.id === pageId) : 
+        const page = pageId && pageId !== '0' ?
+            state.pages.find((pageItem) => pageItem.id === pageId) :
             {
                 id: '0',
                 title: '',
@@ -16,7 +16,7 @@ export default connect(
                 content: {},
                 templateId: '',
                 zone: '',
-            }; 
+            };
 
         return {
             router: state.router,
@@ -29,10 +29,10 @@ export default connect(
     },
     (dispatch) => {
         return {
-            onLoadPages: (success, fail) => { 
+            onLoadPages: (success, fail) => {
                 dispatch(fetchPopulatePages(success, fail));
             },
-            onClickLogout: () => { 
+            onClickLogout: () => {
                 dispatch(fetchLogout());
             },
             onAddPage: (page, success, fail) => {
@@ -43,4 +43,4 @@ export default connect(
             }
         }
     }
-)(PageForm); 
+)(PageForm);

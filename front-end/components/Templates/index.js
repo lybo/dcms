@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import PageLayout from './PageLayout'
-import Link from './Link'
+import PageLayout from '../PageLayout/'
+import Link from '../Link/'
 import { redirect } from 'redux-router-director'
-import '!style!css!less!./Templates.less'
+import '!style!css!less!./style.less'
 
 class Templates extends React.Component {
     constructor(props) {
@@ -39,7 +39,7 @@ class Templates extends React.Component {
             const { onDelete } = this.props;
             onDelete && onDelete(this.state.template.id);
             this.setState({
-                template: null 
+                template: null
             });
         }
     }
@@ -118,7 +118,7 @@ class Templates extends React.Component {
                         </div>
 
                     </div>
-            </PageLayout>        
+            </PageLayout>
         );
     }
 }

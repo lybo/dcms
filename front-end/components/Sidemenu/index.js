@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import Link from './Link'
+import Link from '../Link/'
 import { redirect } from 'redux-router-director'
-import '!style!css!less!./Sidemenu.less'
+import '!style!css!less!./style.less'
 
 class Sidemenu extends React.Component {
     constructor(props) {
@@ -11,7 +11,7 @@ class Sidemenu extends React.Component {
     render() {
         const { onLogout, router, auth_user } = this.props;
         const pattern = router && router.pattern ? router.pattern : '/';
-      
+
         return (
             <div className="col-md-2 sidebar">
                     <div className="row">
@@ -66,7 +66,7 @@ class Sidemenu extends React.Component {
                             </nav>
                         </div>
                     </div>
-                </div>        
+                </div>
             );
     }
 }

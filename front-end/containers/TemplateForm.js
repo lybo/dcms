@@ -1,4 +1,4 @@
-import TemplateForm from '../components/TemplateForm'
+import TemplateForm from '../components/TemplateForm/'
 import { connect } from 'react-redux'
 import { fetchLogout } from '../actions/user'
 import { fetchPopulateTemplates, fetchAddTemplate, fetchUpdateTemplate } from '../actions/template'
@@ -6,28 +6,28 @@ import { fetchPopulateTemplates, fetchAddTemplate, fetchUpdateTemplate } from '.
 export default connect(
     (state) => {
         const { templateId } = state.router.params;
-        const template = templateId !== '0' ? 
-            state.templates.find((templateItem) => templateItem.id === templateId) : 
+        const template = templateId !== '0' ?
+            state.templates.find((templateItem) => templateItem.id === templateId) :
             {
                 id: '0',
                 title: '',
                 description: '',
-            }; 
+            };
 
         return {
             router: state.router,
             auth_user: state.auth_user,
             templates: state.templates,
             template,
-            request: state.requests.template 
+            request: state.requests.template
         };
     },
     (dispatch) => {
         return {
-            onLoadTemplates: () => { 
+            onLoadTemplates: () => {
                 dispatch(fetchPopulateTemplates());
             },
-            onClickLogout: () => { 
+            onClickLogout: () => {
                 dispatch(fetchLogout());
             },
             onAddTemplate: (template, success, fail) => {
@@ -38,4 +38,4 @@ export default connect(
             }
         }
     }
-)(TemplateForm); 
+)(TemplateForm);

@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import Link from './Link'
-import Spinner from './Spinner'
+import Link from '../Link/'
+import Spinner from '../Spinner/'
 import { redirect } from 'redux-router-director'
-import '!style!css!less!./Login.less'
+import '!style!css!less!./style.less'
 
 class Login extends React.Component {
     constructor(props) {
@@ -22,19 +22,19 @@ class Login extends React.Component {
 
             this.emailValue = this.email.value;
             onSubmit(
-                this.email.value, 
+                this.email.value,
                 this.password.value,
                 () => {
                     this.email.value = '';
                     this.password.value = '';
                     redirect(window.urlAttempt || '/dashboard');
-                }, 
+                },
                 () => {
                     this.email.value = this.emailValue;
                     this.password.value = '';
                 });
         }
-      
+
         return !request.status ? (
             <div className="container login" >
                 <div className="col-md-12">
@@ -64,7 +64,7 @@ class Login extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>        
+            </div>
         ) : (
             <div className="page-wrapper">
                 <Spinner />

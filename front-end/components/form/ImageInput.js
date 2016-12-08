@@ -1,4 +1,4 @@
-import FileManager from '../FileManager'
+import FileManager from '../FileManager/'
 import React, { Component, PropTypes } from 'react'
 
 class ImageInput extends React.Component {

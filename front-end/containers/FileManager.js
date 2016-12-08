@@ -1,11 +1,11 @@
-import FileManager from '../components/FileManager'
+import FileManager from '../components/FileManager/'
 import { connect } from 'react-redux'
 import { receivePopulateFiles, fetchAddFile, fetchDeleteFile } from '../actions/file'
 
 export default connect(
     (state) => {
         return {
-            request: state.requests.file 
+            request: state.requests.file
         };
     },
     (dispatch) => {
@@ -21,6 +21,6 @@ export default connect(
             }
         }
     }
-)(FileManager); 
+)(FileManager);
 
 

@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import PageLayout from './PageLayout'
-import Spinner from './Spinner'
+import PageLayout from '../PageLayout/'
+import Spinner from '../Spinner/'
 import { redirect } from 'redux-router-director'
-import '!style!css!less!./UserForm.less'
+import '!style!css!less!./style.less'
 
 class UserForm extends React.Component {
     constructor(props) {

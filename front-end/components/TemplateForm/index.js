@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import PageLayout from './PageLayout'
-import FileManager from './FileManager'
-import Spinner from './Spinner'
+import PageLayout from '../PageLayout/'
+import FileManager from '../FileManager/'
+import Spinner from '../Spinner/'
 import { redirect } from 'redux-router-director'
-import '!style!css!less!./TemplateForm.less'
-import { USER_ROLE } from '../constants/ActionTypes'
+import '!style!css!less!./style.less'
+import { USER_ROLE } from '../../constants/ActionTypes'
 
 const DATE_FORMAT = 'DD/MM/YYYY';
 
