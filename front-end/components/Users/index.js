@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import PageLayout from '../PageLayout'
 import Link from '../Link/'
+import { USER_ROLE } from '../../constants/ActionTypes'
 import { redirect } from 'redux-router-director'
 import '!style!css!less!./style.less'
 
@@ -90,17 +91,23 @@ class Users extends React.Component {
                                 <div className="panel-body">
                                     <ul className="list-group">
 
-                                        {users.map((user) => {
-                                            return (
-                                                <li className="list-group-item" key={user.id}>
-                                                    <span className="list-wrapper__name">{user.email}</span>
-                                                    <small className="small list-wrapper__role">{user.role}</small>
-                                                    <div className="pull-right action-buttons">
-                                                        <Link url={`/users/${user.id}`}><span className="glyphicon glyphicon-pencil"></span></Link>
-                                                        <a href="#" className="trash" onClick={this.onDelete(user.id)}><span className="glyphicon glyphicon-trash"></span></a>
-                                                    </div>
-                                                </li>
-                                            );
+                                        {users
+                                            .filter((user) => {
+                                                const authPriority = USER_ROLE.indexOf(auth_user.role);
+                                                const userPriority = USER_ROLE.indexOf(user.role);
+                                                return authPriority - userPriority <= 0;
+                                            })
+                                            .map((user) => {
+                                                return (
+                                                    <li className="list-group-item" key={user.id}>
+                                                        <span className="list-wrapper__name">{user.email}</span>
+                                                        <small className="small list-wrapper__role">{user.role}</small>
+                                                        <div className="pull-right action-buttons">
+                                                            <Link url={`/users/${user.id}`}><span className="glyphicon glyphicon-pencil"></span></Link>
+                                                            <a href="#" className="trash" onClick={this.onDelete(user.id)}><span className="glyphicon glyphicon-trash"></span></a>
+                                                        </div>
+                                                    </li>
+                                                );
                                         })}
 
                                     </ul>

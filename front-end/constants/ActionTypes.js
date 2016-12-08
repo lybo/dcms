@@ -29,5 +29,5 @@ export const USER_ROLE = [
     'manager'
 ];
 
-export const DEV_HOST = 'http://localhost'; 
-export const PROD_HOST = 'http://146.185.173.55'; 
+export const DEV_HOST = 'http://localhost';
+export const PROD_HOST = 'http://146.185.173.55';
