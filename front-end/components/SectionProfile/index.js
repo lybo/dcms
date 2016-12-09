@@ -3,6 +3,7 @@ import PageLayout from '../PageLayout/'
 import UserForm from '../UserForm/'
 import Spinner from '../Spinner/'
 import { redirect } from 'redux-router-director'
+import { getAuthorizedUserRoles } from '../../utils'
 import '!style!css!less!./style.less'
 
 class SectionProfile extends React.Component {
@@ -12,6 +13,7 @@ class SectionProfile extends React.Component {
 
     render() {
         const { router, onClickLogout, auth_user, request, onAddUser, onUpdateUser } = this.props;
+        const authorizedUserRoles = getAuthorizedUserRoles(auth_user.role);
 
         return (
             <PageLayout router={router} onClickLogout={onClickLogout} auth_user={auth_user} >
@@ -21,6 +23,7 @@ class SectionProfile extends React.Component {
                     request={request}
                     editRole={false}
                     editPassword={true}
+                    authorizedUserRoles={authorizedUserRoles}
                     />
             </PageLayout>
          );

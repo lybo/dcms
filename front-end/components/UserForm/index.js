@@ -3,6 +3,13 @@ import PageLayout from '../PageLayout/'
 import Spinner from '../Spinner/'
 import { redirect } from 'redux-router-director'
 import '!style!css!less!./style.less'
+import { USER_ROLE } from '../../constants/ActionTypes'
+
+const userRoleTranslation = {
+    'super_admin': 'Super Admin',
+    'admin': 'Admin',
+    'manager': 'Manager',
+};
 
 class UserForm extends React.Component {
     constructor(props) {
@@ -50,7 +57,7 @@ class UserForm extends React.Component {
     }
 
     render() {
-        const { request, user, editRole, editPassword } = this.props;
+        const { request, user, editRole, editPassword, authorizedUserRoles } = this.props;
 
         return (
             <div className="panel panel-default">
@@ -77,9 +84,11 @@ class UserForm extends React.Component {
                                     <label htmlFor="role">Role</label>
                                     <select ref="role" ref={(ref) => this.role = ref} defaultValue={user.role} className="form-control" id="role">
                                         <option value="">Select role</option>
-                                        <option value="super_admin">Super Administrator</option>
-                                        <option value="admin">Administrator</option>
-                                        <option value="manager">Manager</option>
+                                        {authorizedUserRoles.map(userRole => {
+                                            return (
+                                                <option key={userRole} value={userRole}>{userRoleTranslation[userRole]}</option>
+                                            );
+                                        })}
                                     </select>
                                 </div>
                             ) : (
