@@ -6,6 +6,27 @@ import { redirect } from 'redux-router-director'
 import '!style!css!less!./style.less'
 import { USER_ROLE } from '../../constants/ActionTypes'
 
+const INPUTS = [
+    'text',
+    'textarea',
+    'editor',
+    'editorJavascript',
+    'editorHtml',
+    'richTextarea',
+    'image',
+];
+
+const inputTranslations = {
+    text: 'Text',
+    textarea: 'Textarea',
+    editor: 'Editor',
+    editorJavascript: 'Editor - javascript',
+    editorHtml: 'Editor - html',
+    richTextarea: 'Rich textarea',
+    image: 'Image',
+};
+
+
 const DATE_FORMAT = 'DD/MM/YYYY';
 
 class TemplateForm extends React.Component {
@@ -105,7 +126,7 @@ class TemplateForm extends React.Component {
     addField(evt) {
         return (evt) => {
             evt.preventDefault();
-            
+
             let fields = this.state.fields;
             fields.push({
                 name: this.field_name.value,
@@ -146,10 +167,11 @@ class TemplateForm extends React.Component {
                     <label>&nbsp;Input</label>
                     <select ref={(ref) => this.field_input = ref} defaultValue={this.state.field.input || ''} className="form-control" name="field-input">
                         <option value="">Select input type</option>
-                        <option value="text">Text</option>
-                        <option value="textarea">Textarea</option>
-                        <option value="rich-textarea">Rich textarea</option>
-                        <option value="image">Image</option>
+                        {INPUTS.map((inputKey) => {
+                            return (
+                                <option key={`add-${inputKey}`} value={inputKey}>{inputTranslations[inputKey]}</option>
+                            );
+                        })}
                     </select>
                 </div>
                 <div className="form-group">
@@ -175,10 +197,11 @@ class TemplateForm extends React.Component {
                         <label>&nbsp;Quantity</label>
                         <select onChange={this.updateFieldInput(i)} defaultValue={field.input || ''} className="form-control"  name="field-quantity[i]">
                             <option value="">Select input type</option>
-                            <option value="text">Text</option>
-                            <option value="textarea">Textarea</option>
-                            <option value="rich-textarea">Rich textarea</option>
-                            <option value="image">Image</option>
+                            {INPUTS.map((inputKey) => {
+                                return (
+                                    <option key={`update-${inputKey}`} value={inputKey}>{inputTranslations[inputKey]}</option>
+                                );
+                            })}
                         </select>
                     </div>
                     <div className="form-group">
@@ -197,7 +220,7 @@ class TemplateForm extends React.Component {
                     <h3 className="panel-title">Template</h3>
                 </div>
                 <div className="panel-body">
-                    <div className="form-area">  
+                    <div className="form-area">
                         <form role="form" className="clearfix" onSubmit={this.onSave()}>
 
                             <div className="form-group">
@@ -269,12 +292,12 @@ class TemplateForm extends React.Component {
             <div>
                 <Spinner />
             </div>
-        ); 
-        
+        );
+
         return (
             <PageLayout router={router} onClickLogout={onClickLogout} auth_user={auth_user} >
                 {Form}
-            </PageLayout>        
+            </PageLayout>
          );
     }
 }

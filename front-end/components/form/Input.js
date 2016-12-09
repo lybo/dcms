@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import TextInput from './TextInput'
 import TextareaInput from './TextareaInput'
+import EditorInput from './EditorInput'
 import ImageInput from './ImageInput'
 
 class Input extends React.Component {
@@ -11,48 +12,79 @@ class Input extends React.Component {
     render() {
         const { form, type, label, name, value, defaultValue } = this.props;
 
-
         switch (type) {
             case 'text':
                 return (
-                    <TextInput 
+                    <TextInput
                         value={value}
                         form={form}
-                        label={label} 
-                        name={name} 
+                        label={label}
+                        name={name}
                         defaultValue={defaultValue} />
                 );
 
             case 'textarea':
                 return (
-                    <TextareaInput 
+                    <TextareaInput
                         value={value}
                         form={form}
-                        label={label} 
-                        name={name} 
+                        label={label}
+                        name={name}
                         defaultValue={defaultValue} />
+                );
+
+            case 'editor':
+                return (
+                    <EditorInput
+                        value={value}
+                        form={form}
+                        label={label}
+                        name={name}
+                        defaultValue={defaultValue} />
+                );
+
+            case 'editorJavascript':
+                return (
+                    <EditorInput
+                        value={value}
+                        form={form}
+                        label={label}
+                        name={name}
+                        defaultValue={defaultValue}
+                        mode={'javascipt'} />
+                );
+
+            case 'editorHtml':
+                return (
+                    <EditorInput
+                        value={value}
+                        form={form}
+                        label={label}
+                        name={name}
+                        defaultValue={defaultValue}
+                        mode={'htmlmixed'} />
                 );
 
             case 'image':
                 return (
-                    <ImageInput 
+                    <ImageInput
                         value={value}
                         form={form}
-                        label={label} 
-                        name={name} 
+                        label={label}
+                        name={name}
                         defaultValue={defaultValue} />
                 );
 
-            default: 
+            default:
                 return (
-                    <TextInput 
+                    <TextInput
                         value={value}
                         form={form}
-                        label={label} 
-                        name={name} 
+                        label={label}
+                        name={name}
                         defaultValue={defaultValue} />
                 );
-        }   
+        }
 
         return (
             <div className="form-group">
