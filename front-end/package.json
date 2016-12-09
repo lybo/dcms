@@ -22,6 +22,7 @@
     "classnames": "^2.1.2",
     "react": "^15.2.1",
     "react-addons-css-transition-group": "^15.2.1",
+    "react-codemirror": "^0.3.0",
     "react-dom": "^15.2.1",
     "react-redux": "^4.0.4",
     "react-sortable-hoc": "^0.1.0",
