@@ -1,5 +1,6 @@
 import FileManager from '../FileManager/'
 import React, { Component, PropTypes } from 'react'
+import * as helper from './helper'
 
 class ImageInput extends React.Component {
     constructor(props) {
@@ -7,7 +8,7 @@ class ImageInput extends React.Component {
         const { form, value, name } = this.props;
         form[name] = value || '';
         this.state = {
-            image: value || '',
+            image: form[name],
         };
 
         this.onClickFileManager = this.onClickFileManager.bind(this);
@@ -46,8 +47,18 @@ class ImageInput extends React.Component {
         }
     }
 
+    validate() {
+        const { isRequired, validate } = this.props;
+        const { image } = this.state;
+
+        return helper.validate(image, validate, isRequired);
+    }
+
     render() {
         const { form, label, name, defaultValue } = this.props;
+        const { image } = this.state;
+
+        const isValid = this.validate();
 
         const Image = !this.state.image ? (
             <div>
@@ -57,11 +68,11 @@ class ImageInput extends React.Component {
             <div className="row">
                 <div className="col-xs-6 col-md-3">
                     <a href="#" className="thumbnail" onClick={this.onClickFileManager()}>
-                        <img src={this.state.image} />
+                        <img src={image} />
                     </a>
                     <div className="caption">
                         <a href="#" onClick={this.onClickRemove()}>
-                           {'Remove Image'} 
+                           {'Remove Image'}
                         </a>
                     </div>
                 </div>
@@ -69,7 +80,7 @@ class ImageInput extends React.Component {
         );
 
         return (
-            <div className="form-group">
+            <div className={`form-group ${isValid ? '' : 'has-error'}`}>
                 <div className="modal fade bs-example-modal-lg" tabIndex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id={`filemanager-${name}`}>
                     <div className="modal-dialog modal-lg" role="document">
                         <div className="modal-content">
@@ -90,6 +101,11 @@ class ImageInput extends React.Component {
                     <label htmlFor="image">{label}</label>
                     {Image}
                 </div>
+                {isValid ? (
+                    ''
+                ) : (
+                    <span className="help-block">This field is required</span>
+                )}
             </div>
          );
     }
