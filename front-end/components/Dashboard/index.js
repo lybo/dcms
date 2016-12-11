@@ -9,9 +9,9 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        const { onClickLogout, auth_user } = this.props;
+        const { onClickLogout, auth_user, cmsName } = this.props;
         return (
-            <PageLayout onClickLogout={onClickLogout} auth_user={auth_user} >
+            <PageLayout cmsName={cmsName} onClickLogout={onClickLogout} auth_user={auth_user} >
                 <div className="panel panel-default">
                     <div className="panel-heading">{'Dashboard'}</div>
                     <div className="panel-body">

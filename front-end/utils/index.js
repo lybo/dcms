@@ -1,4 +1,4 @@
-import { USER_ROLE } from '../constants/ActionTypes'
+import { USER_ROLE } from '../constants/Generic'
 
 
 export function getAuthorizedUserRoles(role) {

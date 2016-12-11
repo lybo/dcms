@@ -1,0 +1,5 @@
+{
+    "title": "DCMS",
+    "devhost": "http://localhost:5000",
+    "prodhost": "http://146.185.173.55:5000"
+}

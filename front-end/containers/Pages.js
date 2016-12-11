@@ -2,6 +2,7 @@ import Pages from '../components/Pages/'
 import { connect } from 'react-redux'
 import { fetchLogout } from '../actions/user'
 import { fetchPopulatePages, fetchUpdatePage, fetchDeletePage } from '../actions/page'
+import { PAGE_TITLE } from '../constants/Generic'
 
 export default connect(
     (state) => {
@@ -10,6 +11,7 @@ export default connect(
             auth_user: state.auth_user,
             pages: state.pages || [],
             templates: state.templates || [],
+            cmsName: PAGE_TITLE,
         };
     },
     (dispatch) => {

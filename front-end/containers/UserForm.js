@@ -1,6 +1,7 @@
 import SectionUserForm from '../components/SectionUserForm/'
 import { connect } from 'react-redux'
 import { fetchLogout, fetchPopulateUsers, fetchAddUser, fetchUpdateUser } from '../actions/user'
+import { PAGE_TITLE } from '../constants/Generic'
 
 export default connect(
     (state) => {
@@ -19,7 +20,8 @@ export default connect(
             auth_user: state.auth_user,
             users: state.users,
             user,
-            request: state.requests.user
+            request: state.requests.user,
+            cmsName: PAGE_TITLE,
         };
     },
     (dispatch) => {

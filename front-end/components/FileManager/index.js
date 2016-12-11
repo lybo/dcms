@@ -3,9 +3,9 @@ import Link from '../Link/'
 import Spinner from '../Spinner/'
 import { redirect } from 'redux-router-director'
 import '!style!css!less!./style.less'
-import { DEV_HOST, PROD_HOST } from '../../constants/ActionTypes'
+import { DEV_HOST, PROD_HOST } from '../../constants/Generic'
 
-const HOST = __DEV_HOST__ ? `${DEV_HOST}:5000` : `${PROD_HOST}:5000`;
+const HOST = __DEV_HOST__ ? `${DEV_HOST}` : `${PROD_HOST}`;
 
 class FileManager extends React.Component {
     constructor(props) {

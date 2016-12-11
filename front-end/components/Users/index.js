@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import PageLayout from '../PageLayout'
 import Link from '../Link/'
-import { USER_ROLE } from '../../constants/ActionTypes'
+import { USER_ROLE } from '../../constants/Generic'
 import { redirect } from 'redux-router-director'
 import '!style!css!less!./style.less'
 
@@ -46,7 +46,7 @@ class Users extends React.Component {
     }
 
     render() {
-        const { router, onClickLogout, auth_user, users } = this.props;
+        const { cmsName, router, onClickLogout, auth_user, users } = this.props;
         let selectedUser = this.state.user;
         selectedUser = selectedUser ? selectedUser : {
             id: 0,
@@ -54,7 +54,7 @@ class Users extends React.Component {
         };
 
         return (
-            <PageLayout router={router} onClickLogout={onClickLogout} auth_user={auth_user} >
+            <PageLayout cmsName={cmsName} router={router} onClickLogout={onClickLogout} auth_user={auth_user} >
                 <div className="modal fade bs-example-modal-sm" tabIndex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="confirm">
                     <div className="modal-dialog modal-sm" role="document">
                         <div className="modal-content">

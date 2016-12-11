@@ -2,6 +2,7 @@ import TemplateForm from '../components/TemplateForm/'
 import { connect } from 'react-redux'
 import { fetchLogout } from '../actions/user'
 import { fetchPopulateTemplates, fetchAddTemplate, fetchUpdateTemplate } from '../actions/template'
+import { PAGE_TITLE } from '../constants/Generic'
 
 export default connect(
     (state) => {
@@ -19,7 +20,8 @@ export default connect(
             auth_user: state.auth_user,
             templates: state.templates,
             template,
-            request: state.requests.template
+            request: state.requests.template,
+            cmsName: PAGE_TITLE,
         };
     },
     (dispatch) => {

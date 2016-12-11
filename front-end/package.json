@@ -4,6 +4,7 @@
   "description": "Planking",
   "scripts": {
     "start": "NODE_ENV=development node server.js",
+    "prod": "NODE_ENV=production node server.js",
     "build": "webpack --config webpack.config.production.js",
     "test": "NODE_ENV=test mocha --recursive --compilers js:babel-core/register --require ./test/setup.js",
     "test:watch": "npm test -- --watch",
@@ -20,6 +21,8 @@
   "homepage": "http://rackt.github.io/redux",
   "dependencies": {
     "classnames": "^2.1.2",
+    "handlebars": "^4.0.6",
+    "json-loader": "^0.5.4",
     "react": "^15.2.1",
     "react-addons-css-transition-group": "^15.2.1",
     "react-codemirror": "^0.3.0",

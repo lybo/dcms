@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { USER_ROLE } from '../../constants/ActionTypes';
+import { USER_ROLE } from '../../constants/Generic';
 import PageLayout from '../PageLayout/'
 import Link from '../Link/'
 import { redirect } from 'redux-router-director'
@@ -156,7 +156,7 @@ class Pages extends React.Component {
     }
 
     render() {
-        const { router, onClickLogout, auth_user, pages, templates, onSort } = this.props;
+        const { cmsName, router, onClickLogout, auth_user, pages, templates, onSort } = this.props;
         const authUserRole = USER_ROLE.indexOf(auth_user.role);
         let selectedPage = this.state.page;
         selectedPage = selectedPage ? selectedPage : {
@@ -165,7 +165,7 @@ class Pages extends React.Component {
         };
 
         return (
-            <PageLayout router={router} onClickLogout={onClickLogout} auth_user={auth_user} >
+            <PageLayout cmsName={cmsName} router={router} onClickLogout={onClickLogout} auth_user={auth_user} >
                     <div className="col-md-10 content">
                         <div className="modal fade bs-example-modal-sm" tabIndex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="confirm">
                             <div className="modal-dialog modal-sm" role="document">

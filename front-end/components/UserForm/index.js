@@ -3,7 +3,7 @@ import PageLayout from '../PageLayout/'
 import Spinner from '../Spinner/'
 import { redirect } from 'redux-router-director'
 import '!style!css!less!./style.less'
-import { USER_ROLE } from '../../constants/ActionTypes'
+import { USER_ROLE } from '../../constants/Generic'
 
 const userRoleTranslation = {
     'super_admin': 'Super Admin',

@@ -23,11 +23,3 @@ export const SET_ERROR_REQUEST = 'SET_ERROR_REQUEST'
 export const UPLOAD_FILE = 'UPLOAD_FILE';
 export const DELETE_FILE = 'DELETE_FILE';
 
-export const USER_ROLE = [
-    'super_admin',
-    'admin',
-    'manager'
-];
-
-export const DEV_HOST = 'http://localhost';
-export const PROD_HOST = 'http://146.185.173.55';
