@@ -1,6 +1,7 @@
 import SectionProfile from '../components/SectionProfile/'
 import { connect } from 'react-redux'
 import { fetchLogout, fetchPopulateUsers, fetchAddUser, fetchUpdateUser } from '../actions/user'
+import { PAGE_TITLE } from '../constants/Generic'
 
 export default connect(
     (state) => {
@@ -8,7 +9,8 @@ export default connect(
             router: state.router,
             auth_user: state.auth_user,
             users: state.users,
-            request: state.requests.user
+            request: state.requests.user,
+            cmsName: PAGE_TITLE,
         };
     },
     (dispatch) => {

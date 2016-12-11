@@ -99,7 +99,7 @@ class PageForm extends React.Component {
     }
 
     render() {
-        const { router, onClickLogout, auth_user, page, request, templates } = this.props;
+        const { cmsName, router, onClickLogout, auth_user, page, request, templates } = this.props;
         const { selectedTemplate } = this.state;
 
         const templateFields = selectedTemplate ? (
@@ -218,7 +218,7 @@ class PageForm extends React.Component {
         );
 
         return (
-            <PageLayout router={router} onClickLogout={onClickLogout} auth_user={auth_user} >
+            <PageLayout cmsName={cmsName} router={router} onClickLogout={onClickLogout} auth_user={auth_user} >
                 {Form}
             </PageLayout>
          );

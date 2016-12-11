@@ -4,7 +4,7 @@ import FileManager from '../FileManager/'
 import Spinner from '../Spinner/'
 import { redirect } from 'redux-router-director'
 import '!style!css!less!./style.less'
-import { USER_ROLE } from '../../constants/ActionTypes'
+import { USER_ROLE } from '../../constants/Generic'
 
 const INPUTS = [
     'text',
@@ -151,7 +151,7 @@ class TemplateForm extends React.Component {
     }
 
     render() {
-        const { router, onClickLogout, auth_user, template, request } = this.props;
+        const { cmsName, router, onClickLogout, auth_user, template, request } = this.props;
 
         const FieldAdd = (
             <div className="form-inline clearfix">
@@ -295,7 +295,7 @@ class TemplateForm extends React.Component {
         );
 
         return (
-            <PageLayout router={router} onClickLogout={onClickLogout} auth_user={auth_user} >
+            <PageLayout cmsName={cmsName} router={router} onClickLogout={onClickLogout} auth_user={auth_user} >
                 {Form}
             </PageLayout>
          );

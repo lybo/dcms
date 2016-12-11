@@ -2,6 +2,7 @@ import PageForm from '../components/PageForm/'
 import { connect } from 'react-redux'
 import { fetchLogout } from '../actions/user'
 import { fetchPopulatePages, fetchAddPage, fetchUpdatePage } from '../actions/page'
+import { PAGE_TITLE } from '../constants/Generic'
 
 export default connect(
     (state) => {
@@ -25,6 +26,7 @@ export default connect(
             page,
             request: state.requests.page,
             templates: state.templates,
+            cmsName: PAGE_TITLE,
         };
     },
     (dispatch) => {

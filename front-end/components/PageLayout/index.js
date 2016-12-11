@@ -11,11 +11,11 @@ class PageLayout extends React.Component {
     }
 
     render() {
-        const { router, onClickLogout, auth_user, page, request, children } = this.props;
+        const { cmsName, router, onClickLogout, auth_user, page, request, children } = this.props;
 
         return (
             <div>
-                <Header onClickLogout={onClickLogout} user={auth_user} />
+                <Header onClickLogout={onClickLogout} user={auth_user} logo={cmsName} />
                 <div className="container-fluid main-container">
                     <Sidemenu router={router} auth_user={auth_user}/>
                     <div className="col-md-10 content">
@@ -25,8 +25,8 @@ class PageLayout extends React.Component {
                     </div>
                     <footer className="pull-left footer">
                         <div className="col-md-12">
-                            <hr className="divider" /> {'Copyright © 2015 '}
-                            <Link url={ 'http://'}>dcms</Link>
+                            <hr className="divider" /> {'Copyleft © 2015 '}
+                            <Link url={ 'http://'}>{cmsName}</Link>
                         </div>
                     </footer>
                 </div>

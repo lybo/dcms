@@ -18,7 +18,7 @@ class Header extends React.Component {
     }
 
     render() {
-        const { onClickLogout, user } = this.props;
+        const { onClickLogout, user, logo } = this.props;
         const _onClickLogout = () => {
             onClickLogout();
             redirect('/login');
@@ -37,7 +37,7 @@ class Header extends React.Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <Link url={'/dashboard'} className="navbar-brand"> DCMS </Link>
+                        <Link url={'/dashboard'} className="navbar-brand">{logo}</Link>
                     </div>
                     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul className="nav navbar-nav navbar-right">
