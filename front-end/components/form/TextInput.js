@@ -1,25 +1,43 @@
 import React, { Component, PropTypes } from 'react'
+import * as helper from './helper'
 
 class TextInput extends React.Component {
     constructor(props) {
         super(props);
         const { form, value, name } = this.props;
         form[name] = value || '';
+        this.state = {
+            value: form[name],
+        };
     }
 
     onChange() {
         const { onChange, form, name } = this.props;
         return (evt) => {
-            onChange && onChange(evt.target.value || '');
-            form[name] = evt.target.value || '';
+            const value = evt.target.value || '';
+            onChange && onChange(value);
+            form[name] = value;
+            this.setState({
+                value,
+            });
         };
     }
 
+    validate() {
+        const { isRequired, validate } = this.props;
+        const { value } = this.state;
+
+        return helper.validate(value, validate, isRequired);
+    }
+
     render() {
-        const { form, value, label, name, defaultValue } = this.props;
+        const { form, label, name, defaultValue } = this.props;
+        const { value } = this.state;
+
+        const isValid = this.validate();
 
         return (
-            <div className="form-group">
+            <div className={`form-group ${isValid ? '' : 'has-error'}`}>
                 <label htmlFor={name}>{label}</label>
                 <input ref={name}
                     ref={(ref) => this.input = ref}
@@ -30,6 +48,11 @@ class TextInput extends React.Component {
                     id={name}
                     name={name}
                     placeholder={label} />
+                {isValid ? (
+                    ''
+                ) : (
+                    <span className="help-block">This field is required</span>
+                )}
             </div>
          );
     }

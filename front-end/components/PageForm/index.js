@@ -1,15 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import PageLayout from '../PageLayout/'
-import Spinner from '../Spinner/'
+import StickyMessage from '../StickyMessage/'
 import Input from '../form/Input'
 import { redirect } from 'redux-router-director'
 import moment from 'moment';
 import '!style!css!less!./style.less'
-import { DEV_HOST, PROD_HOST } from '../../constants/ActionTypes'
+import { DEV_HOST, PROD_HOST } from '../../constants/Generic'
 
 
 const DATE_FORMAT = 'DD/MM/YYYY';
-const HOST = __DEV_HOST__ ? `${DEV_HOST}:3000` : `${PROD_HOST}:3000`;
+const HOST = __DEV_HOST__ ? `${DEV_HOST}` : `${PROD_HOST}`;
+const requiredFields = ['title', 'templateId'];
 
 class PageForm extends React.Component {
     constructor(props) {
@@ -20,8 +21,11 @@ class PageForm extends React.Component {
             // publicationStartDate: page.publicationStartDate,
             // publicationEndDate: page.publicationEndDate,
             selectedTemplate: templates.find(template => template.id === page.templateId) || null,
+            isValid: true,
+            isSaved: false,
         };
 
+        this.fields = {};
         this.templateFields = {};
     }
 
@@ -59,6 +63,10 @@ class PageForm extends React.Component {
         evt.preventDefault();
     }
 
+    onClickDoNothing(evt) {
+        evt.preventDefault();
+    }
+
     onSave(goToList) {
         const { page, onAddPage, onUpdatePage, pagesNumber, onLoadPages } = this.props;
         const onSave = page.id !== '0' ? onUpdatePage : onAddPage;
@@ -66,41 +74,71 @@ class PageForm extends React.Component {
             evt.preventDefault();
 
             let content = {};
-            this.state.selectedTemplate.fields.forEach((field) => {
-                content[field.name] = this.templateFields[field.name];
+            let isValid = true;
+            requiredFields.forEach((inputKey) => {
+                if (this.fields[inputKey].trim() === '') {
+                    isValid = false;
+                }
             });
+
+            if (this.state.selectedTemplate) {
+                this.state.selectedTemplate.fields.forEach((field) => {
+                    const value = this.templateFields[field.name];
+                    content[field.name] = value;
+                    if (field.isRequired && value === '') {
+                        isValid = false;
+                    }
+                });
+            }
+
+            this.setState({
+                isValid
+            });
+
+            if (!isValid) {
+                return;
+            }
 
             onSave({
                     ...page,
                     content,
-                    title: this.title.value,
+                    title: this.fields['title'],
                     published: this.isPublished.checked,
                     zIndex: page.id !== '0' ? page.zIndex : pagesNumber,
                     // publicationStartDate: moment(this.startInput.value, DATE_FORMAT).unix(),
                     // publicationEndDate: moment(this.endInput.value, DATE_FORMAT).unix(),
                     // zone: this.zone.value,
-                    templateId: this.templateId.value,
+                    templateId: this.fields['templateId'],
                 },
                 (id) => {
+                    if (page.id !== '0' && !goToList) {
+                        this.setState({
+                            isSaved: true
+                        });
+                        setTimeout(() => {
+                            this.setState({
+                                isSaved: false
+                            });
+                        }, 3000);
+                        return;
+                    }
                     !goToList && redirect(`/pages/${id}`);
                     goToList && redirect(`/pages`);
                 });
         };
     }
 
-    onChangeTemplate() {
+    onChangeTemplate(value) {
         const { templates } = this.props;
-        return (evt) => {
-            const selectedTemplate = templates.find(item => item.id === evt.target.value) || null;
-            this.setState({
-                selectedTemplate
-            });
-        };
+        const selectedTemplate = templates.find(item => item.id === value) || null;
+        this.setState({
+            selectedTemplate
+        });
     }
 
     render() {
         const { cmsName, router, onClickLogout, auth_user, page, request, templates } = this.props;
-        const { selectedTemplate } = this.state;
+        const { selectedTemplate, isValid, isSaved } = this.state;
 
         const templateFields = selectedTemplate ? (
             <div>
@@ -112,7 +150,9 @@ class PageForm extends React.Component {
                             type={field.input}
                             label={field.label}
                             name={field.name}
-                            defaultValue={field.defaultValue} />
+                            defaultValue={field.defaultValue}
+                            validate={!!!isValid}
+                            isRequired={field.isRequired} />
                     );
                 })}
             </div>
@@ -123,6 +163,11 @@ class PageForm extends React.Component {
         const Form = (
 
             <div className="panel panel-default">
+                {isSaved ? (
+                    <StickyMessage>{ 'Page is saved successfully' }</StickyMessage>
+                ) : (
+                    ''
+                ) }
                 <div className="panel-heading">
                     <h3 className="panel-title">Page</h3>
                 </div>
@@ -130,10 +175,15 @@ class PageForm extends React.Component {
                     <div className="form-area">
                         <form role="form" className="clearfix" onSubmit={this.onSubmit.bind(this)}>
 
-                            <div className="form-group">
-                                <label htmlFor="title">Title</label>
-                                <input ref="title" ref={(ref) => this.title = ref} defaultValue={page.title} type="text" className="form-control" id="title" name="title" placeholder="Title" />
-                            </div>
+                            <Input
+                                form={this.fields}
+                                value={page.title}
+                                type={'text'}
+                                label={'Title'}
+                                name={'title'}
+                                defaultValue={''}
+                                validate={!!!isValid}
+                                isRequired={requiredFields.indexOf('title') !== -1} />
 
                             <div className="checkbox">
                                 <label htmlFor="isPublished">
@@ -155,21 +205,18 @@ class PageForm extends React.Component {
                                 </select>
                             </div>
 */}
-                            <div className="form-group">
-                                <label htmlFor="templateId">Template</label>
-                                <select ref="templateId"
-                                        onChange={this.onChangeTemplate()}
-                                        ref={(ref) => this.templateId = ref}
-                                        defaultValue={page.templateId}
-                                        className="form-control"
-                                        id="templateId">
-                                    <option value="">Select template</option>
-
-                                    {templates.map((template, i) => (
-                                        <option key={`template-${template.id}`} value={template.id}>{template.title}</option>
-                                    ))}
-                                </select>
-                            </div>
+                            <Input
+                                form={this.fields}
+                                emptyValueLabel={'Select template'}
+                                options={templates}
+                                onChange={this.onChangeTemplate.bind(this)}
+                                value={page.templateId}
+                                type={'select'}
+                                label={'Template'}
+                                name={'templateId'}
+                                defaultValue={''}
+                                validate={!!!isValid}
+                                isRequired={requiredFields.indexOf('templateId') !== -1} />
 
                             {selectedTemplate ? (
                                 <div className="panel panel-default">
@@ -191,25 +238,47 @@ class PageForm extends React.Component {
                             )}
 
 
-                            {request.error ? (
+                            {request.error || !isValid ? (
                                 <div className="alert alert-danger">
                                     { 'Some fields are required' }
                                 </div>
                             ) : ( '' )}
 
-                            <p className="pull-right">
-                                {page.id !== '0' ? (
-                                    <a href={`${HOST}/#preview-${page.id}`} target="_blank" className="btn btn-warning">Preview</a>
-                                ) : (
-                                    ''
-                                )}
-                                &nbsp;
-                                &nbsp;
-                                <a href="#" name="submit" className="btn btn-primary" onClick={this.onSave(false)}>Save and Stay</a>
-                                &nbsp;
-                                &nbsp;
-                                <a href="#" name="submit" className="btn btn-primary" onClick={this.onSave(true)}>Save and go back</a>
-                            </p>
+                            {!request.status ? (
+                                <p className="pull-right">
+                                    {page.id !== '0' ? (
+                                        <a href={`${HOST}/#preview-${page.id}`} target="_blank" className="btn btn-warning">Preview</a>
+                                    ) : (
+                                        ''
+                                    )}
+                                    &nbsp;
+                                    &nbsp;
+                                    <a href="#" name="submit" className="btn btn-primary" onClick={this.onSave(false)}>Save and Stay</a>
+                                    &nbsp;
+                                    &nbsp;
+                                    <a href="#" name="submit" className="btn btn-primary" onClick={this.onSave(true)}>Save and go back</a>
+                                </p>
+                            ) : (
+                                <p className="pull-right">
+                                    {page.id !== '0' ? (
+                                        <a href="#" className="btn btn-warning" onClick={this.onClickDoNothing}>
+                                            <span className="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...
+                                        </a>
+                                    ) : (
+                                        ''
+                                    )}
+                                    &nbsp;
+                                    &nbsp;
+                                    <a href="#" name="submit" className="btn btn-primary" onClick={this.onClickDoNothing}>
+                                        <span className="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...
+                                    </a>
+                                    &nbsp;
+                                    &nbsp;
+                                    <a href="#" name="submit" className="btn btn-primary" onClick={this.onClickDoNothing}>
+                                        <span className="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...
+                                    </a>
+                                </p>
+                            )}
                         </form>
                     </div>
                 </div>

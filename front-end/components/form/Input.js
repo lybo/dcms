@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import TextInput from './TextInput'
+import SelectInput from './SelectInput'
 import TextareaInput from './TextareaInput'
 import EditorInput from './EditorInput'
 import ImageInput from './ImageInput'
@@ -10,79 +11,117 @@ class Input extends React.Component {
     }
 
     render() {
-        const { form, type, label, name, value, defaultValue } = this.props;
+        const { onChange, form, type, label, name, value,
+            defaultValue, isRequired, validate,
+            options, emptyValueLabel } = this.props;
 
         switch (type) {
             case 'text':
                 return (
                     <TextInput
+                        onChange={onChange}
                         value={value}
                         form={form}
                         label={label}
                         name={name}
-                        defaultValue={defaultValue} />
+                        defaultValue={defaultValue}
+                        validate={validate}
+                        isRequired={isRequired} />
                 );
 
             case 'textarea':
                 return (
                     <TextareaInput
+                        onChange={onChange}
                         value={value}
                         form={form}
                         label={label}
                         name={name}
-                        defaultValue={defaultValue} />
+                        defaultValue={defaultValue}
+                        validate={validate}
+                        isRequired={isRequired} />
+                );
+
+            case 'select':
+                return (
+                    <SelectInput
+                        onChange={onChange}
+                        emptyValueLabel={emptyValueLabel}
+                        options={options}
+                        value={value}
+                        form={form}
+                        label={label}
+                        name={name}
+                        defaultValue={defaultValue}
+                        validate={validate}
+                        isRequired={isRequired} />
                 );
 
             case 'editor':
                 return (
                     <EditorInput
+                        onChange={onChange}
                         value={value}
                         form={form}
                         label={label}
                         name={name}
-                        defaultValue={defaultValue} />
+                        defaultValue={defaultValue}
+                        validate={validate}
+                        isRequired={isRequired} />
                 );
 
             case 'editorJavascript':
                 return (
                     <EditorInput
+                        onChange={onChange}
                         value={value}
                         form={form}
                         label={label}
                         name={name}
                         defaultValue={defaultValue}
-                        mode={'javascipt'} />
+                        isRequired={isRequired}
+                        validate={validate}
+                        mode={'javascript'} />
                 );
 
             case 'editorHtml':
                 return (
                     <EditorInput
+                        onChange={onChange}
                         value={value}
                         form={form}
                         label={label}
                         name={name}
                         defaultValue={defaultValue}
+                        isRequired={isRequired}
+                        validate={validate}
                         mode={'htmlmixed'} />
                 );
 
             case 'image':
                 return (
                     <ImageInput
+                        onChange={onChange}
                         value={value}
                         form={form}
                         label={label}
                         name={name}
-                        defaultValue={defaultValue} />
+                        defaultValue={defaultValue}
+                        validate={validate}
+                        isRequired={isRequired} />
                 );
 
             default:
                 return (
                     <TextInput
+                        onChange={onChange}
                         value={value}
                         form={form}
                         label={label}
                         name={name}
-                        defaultValue={defaultValue} />
+                        defaultValue={defaultValue}
+                        validate={validate}
+                        isRequired={isRequired} />
                 );
         }
 

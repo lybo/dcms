@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import * as helper from './helper'
 
-class TextareaInput extends React.Component {
+class SelectInput extends React.Component {
     constructor(props) {
         super(props);
         const { form, value, name } = this.props;
@@ -31,7 +31,7 @@ class TextareaInput extends React.Component {
     }
 
     render() {
-        const { form, label, name, defaultValue } = this.props;
+        const { form, label, name, defaultValue, options, emptyValueLabel } = this.props;
         const { value } = this.state;
 
         const isValid = this.validate();
@@ -39,17 +39,17 @@ class TextareaInput extends React.Component {
         return (
             <div className={`form-group ${isValid ? '' : 'has-error'}`}>
                 <label htmlFor={name}>{label}</label>
-                <textarea ref={name}
-                    ref={(ref) => this.input = ref}
-                    onChange={this.onChange()}
-                    defaultValue={value || defaultValue || ''}
-                    type="text"
-                    className="form-control"
-                    id={name}
-                    name={name}
-                    placeholder={label}
-                    rows="10"
-                    ></textarea>
+                <select ref={(ref) => this.input = ref}
+                        onChange={this.onChange()}
+                        defaultValue={value || defaultValue || ''}
+                        className="form-control"
+                        id={name}>
+                    <option value="">{emptyValueLabel}</option>
+
+                    {options.map((option, i) => (
+                        <option key={`${name}-${option.id}`} value={option.id}>{option.title}</option>
+                    ))}
+                </select>
                 {isValid ? (
                     ''
                 ) : (
@@ -60,4 +60,4 @@ class TextareaInput extends React.Component {
     }
 }
 
-export default TextareaInput;
+export default SelectInput;

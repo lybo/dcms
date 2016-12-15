@@ -26,7 +26,6 @@ const inputTranslations = {
     image: 'Image',
 };
 
-
 const DATE_FORMAT = 'DD/MM/YYYY';
 
 class TemplateForm extends React.Component {
