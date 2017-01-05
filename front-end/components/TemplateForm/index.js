@@ -9,6 +9,7 @@ import { USER_ROLE } from '../../constants/Generic'
 const INPUTS = [
     'text',
     'textarea',
+    'date',
     'editor',
     'editorJavascript',
     'editorHtml',
@@ -19,6 +20,7 @@ const INPUTS = [
 const inputTranslations = {
     text: 'Text',
     textarea: 'Textarea',
+    date: 'Date Picker',
     editor: 'Editor',
     editorJavascript: 'Editor - javascript',
     editorHtml: 'Editor - html',

@@ -1,0 +1,75 @@
+import React, { Component, PropTypes } from 'react'
+import moment from 'moment';
+import * as helper from './helper'
+
+const DATE_FORMAT = 'DD/MM/YYYY';
+
+class DatePickerInput extends React.Component {
+    constructor(props) {
+        super(props);
+        const { form, value, name } = this.props;
+        form[name] = value || '';
+        this.state = {
+            value: form[name],
+        };
+    }
+    componentDidMount() {
+        const { form, name, onChange } = this.props;
+        const $el = $(`#${name}`);
+        $el.datetimepicker({
+            format: DATE_FORMAT,
+            defaultDate: parseInt(this.state.value) ?
+                moment.unix(parseInt(this.state.value)) :
+                ''
+        });
+
+        $el.on('dp.change',  (e) => {
+            const value = e.date.unix() || '';
+            onChange && onChange(value);
+            form[name] = value;
+            this.setState({
+                value,
+            });
+        });
+    }
+
+    validate() {
+        const { isRequired, validate } = this.props;
+        const { value } = this.state;
+
+        return helper.validate(value, validate, isRequired);
+    }
+
+    render() {
+        const { form, label, name, defaultValue } = this.props;
+        const { value } = this.state;
+
+        const isValid = this.validate();
+
+        return (
+            <div className={`form-inline ${isValid ? '' : 'has-error'}`}>
+                <label htmlFor={name}>{label}</label>
+                <br />
+                <div className="input-group date">
+                    <input ref={name}
+                        ref={(ref) => this.input = ref}
+                        type="text"
+                        className="form-control"
+                        name={name}
+                        id={name}
+                        placeholder={label} />
+                    <span className="input-group-addon">
+                        <span className="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                {isValid ? (
+                    ''
+                ) : (
+                    <span className="help-block">This field is required</span>
+                )}
+            </div>
+         );
+    }
+}
+
+export default DatePickerInput;
