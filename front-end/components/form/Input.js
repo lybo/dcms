@@ -4,6 +4,7 @@ import SelectInput from './SelectInput'
 import TextareaInput from './TextareaInput'
 import EditorInput from './EditorInput'
 import ImageInput from './ImageInput'
+import DatePickerInput from './DatePickerInput'
 
 class Input extends React.Component {
     constructor(props) {
@@ -56,6 +57,20 @@ class Input extends React.Component {
                         validate={validate}
                         isRequired={isRequired} />
                 );
+
+            case 'date':
+                return (
+                    <DatePickerInput
+                        onChange={onChange}
+                        value={value}
+                        form={form}
+                        label={label}
+                        name={name}
+                        defaultValue={defaultValue}
+                        validate={validate}
+                        isRequired={isRequired} />
+                );
+
 
             case 'editor':
                 return (
