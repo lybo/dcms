@@ -83,10 +83,23 @@ class PageForm extends React.Component {
 
             if (this.state.selectedTemplate) {
                 this.state.selectedTemplate.fields.forEach((field) => {
-                    const value = this.templateFields[field.name];
-                    content[field.name] = value;
-                    if (field.isRequired && value === '') {
-                        isValid = false;
+                    if (field.input !== 'rangeDate') {
+                        const value = this.templateFields[field.name];
+                        content[field.name] = value;
+                        if (field.isRequired && value !== undefined && value === '') {
+                            isValid = false;
+                        }
+                    }
+
+                    if (field.input === 'rangeDate') {
+                        [`start${field.name}`, `end${field.name}`].forEach(name => {
+                            const value = this.templateFields[name];
+                            content[name] = value;
+                            if (field.isRequired && value !== undefined && value === '') {
+                                isValid = false;
+                            }
+                        });
+
                     }
                 });
             }
@@ -143,17 +156,34 @@ class PageForm extends React.Component {
         const templateFields = selectedTemplate ? (
             <div>
                 {selectedTemplate.fields.map((field, i) => {
-                    return (
-                        <Input key={field.name + i}
-                            form={this.templateFields}
-                            value={page.content[field.name] || null}
-                            type={field.input}
-                            label={field.label}
-                            name={field.name}
-                            defaultValue={field.defaultValue}
-                            validate={!!!isValid}
-                            isRequired={field.isRequired} />
-                    );
+                    if (field.input !== 'rangeDate') {
+                        return (
+                            <Input key={field.name + i}
+                                form={this.templateFields}
+                                value={page.content[field.name] || null}
+                                type={field.input}
+                                label={field.label}
+                                name={field.name}
+                                defaultValue={field.defaultValue}
+                                validate={!!!isValid}
+                                isRequired={field.isRequired} />
+                        );
+                    }
+
+                    if (field.input === 'rangeDate') {
+                        return (
+                            <Input key={field.name + i}
+                                form={this.templateFields}
+                                startDateValue={page.content[`start${field.name}`] || null}
+                                endDateValue={page.content[`end${field.name}`] || null}
+                                type={field.input}
+                                label={field.label}
+                                name={field.name}
+                                defaultValue={field.defaultValue}
+                                validate={!!!isValid}
+                                isRequired={field.isRequired} />
+                        );
+                    }
                 })}
             </div>
         ) : (

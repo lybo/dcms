@@ -10,6 +10,7 @@ const INPUTS = [
     'text',
     'textarea',
     'date',
+    'rangeDate',
     'editor',
     'editorJavascript',
     'editorHtml',
@@ -21,6 +22,7 @@ const inputTranslations = {
     text: 'Text',
     textarea: 'Textarea',
     date: 'Date Picker',
+    rangeDate: 'Range Date Picker',
     editor: 'Editor',
     editorJavascript: 'Editor - javascript',
     editorHtml: 'Editor - html',
@@ -195,8 +197,8 @@ class TemplateForm extends React.Component {
                         <input onChange={this.updateFieldLabel(i)} defaultValue={field.label || ''} type="text" className="form-control" name="field-label[i]" placeholder="Label" />
                     </div>
                     <div className="form-group">
-                        <label>&nbsp;Quantity</label>
-                        <select onChange={this.updateFieldInput(i)} defaultValue={field.input || ''} className="form-control"  name="field-quantity[i]">
+                        <label>&nbsp;Input</label>
+                        <select onChange={this.updateFieldInput(i)} defaultValue={field.input || ''} className="form-control"  name="field-input[i]">
                             <option value="">Select input type</option>
                             {INPUTS.map((inputKey) => {
                                 return (

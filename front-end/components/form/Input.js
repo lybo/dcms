@@ -5,6 +5,7 @@ import TextareaInput from './TextareaInput'
 import EditorInput from './EditorInput'
 import ImageInput from './ImageInput'
 import DatePickerInput from './DatePickerInput'
+import DateRangePickerInput from './DateRangePickerInput'
 
 class Input extends React.Component {
     constructor(props) {
@@ -67,6 +68,18 @@ class Input extends React.Component {
                         label={label}
                         name={name}
                         defaultValue={defaultValue}
+                        validate={validate}
+                        isRequired={isRequired} />
+                );
+
+            case 'rangeDate':
+                const { startDateValue, endDateValue } = this.props;
+                return (
+                    <DateRangePickerInput
+                        startDateValue={startDateValue}
+                        endDateValue={endDateValue}
+                        form={form}
+                        name={name}
                         validate={validate}
                         isRequired={isRequired} />
                 );
