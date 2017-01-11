@@ -79,6 +79,7 @@ class Input extends React.Component {
                         startDateValue={startDateValue}
                         endDateValue={endDateValue}
                         form={form}
+                        label={label}
                         name={name}
                         validate={validate}
                         isRequired={isRequired} />

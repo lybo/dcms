@@ -1,9 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment';
 import DatePickerInput from './DatePickerInput'
-// import * as helper from './helper'
-
-const DATE_FORMAT = 'DD/MM/YYYY';
 
 class DateRangePickerInput extends React.Component {
     constructor(props) {
@@ -30,13 +27,6 @@ class DateRangePickerInput extends React.Component {
         });
     }
 
-    // validate() {
-    //     const { isRequired, validate } = this.props;
-    //     const { value } = this.state;
-    //
-    //     return helper.validate(value, validate, isRequired);
-    // }
-
     render() {
         const { form, label, name, defaultValue, validate, isRequired } = this.props;
         const { startDateValue, endDateValue, } = this.state;
@@ -46,7 +36,7 @@ class DateRangePickerInput extends React.Component {
                 <DatePickerInput
                     value={startDateValue}
                     form={form}
-                    label={`start`}
+                    label={`${label} (start)`}
                     name={`start${name}`}
                     validate={validate}
                     isRequired={isRequired} />
@@ -54,7 +44,7 @@ class DateRangePickerInput extends React.Component {
                     isEndDate={true}
                     value={endDateValue}
                     form={form}
-                    label={`end`}
+                    label={`${label} (end)`}
                     name={`end${name}`}
                     validate={validate}
                     isRequired={isRequired} />
