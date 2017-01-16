@@ -19,8 +19,8 @@ export default function(state = initialState, action = { type: '', payload: {} }
         case types.EDIT_TEMPLATE:
             return Object.assign({}, state, action.payload);
 
-        default: 
+        default:
             return state;
-    }   
+    }
 };
 

@@ -14,10 +14,10 @@ class DatePickerInput extends React.Component {
         };
     }
     componentDidMount() {
-        const { form, name, onChange, isEndDate } = this.props;
+        const { form, name, onChange, isEndDate, additionalSettings } = this.props;
         const $el = $(`#${name}`);
         const defaultOptions = {
-            format: DATE_FORMAT,
+            format: (additionalSettings && additionalSettings.dateFormat) ? additionalSettings.dateFormat : DATE_FORMAT,
             showClear: true,
             defaultDate: parseInt(this.state.value) ?
                 moment.unix(parseInt(this.state.value)) :

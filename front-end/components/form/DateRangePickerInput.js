@@ -28,7 +28,7 @@ class DateRangePickerInput extends React.Component {
     }
 
     render() {
-        const { form, label, name, defaultValue, validate, isRequired } = this.props;
+        const { form, label, name, defaultValue, validate, isRequired, additionalSettings } = this.props;
         const { startDateValue, endDateValue, } = this.state;
 
         return (
@@ -38,6 +38,7 @@ class DateRangePickerInput extends React.Component {
                     form={form}
                     label={`${label} (start)`}
                     name={`start${name}`}
+                    additionalSettings={additionalSettings}
                     validate={validate}
                     isRequired={isRequired} />
                 <DatePickerInput
@@ -46,6 +47,7 @@ class DateRangePickerInput extends React.Component {
                     form={form}
                     label={`${label} (end)`}
                     name={`end${name}`}
+                    additionalSettings={additionalSettings}
                     validate={validate}
                     isRequired={isRequired} />
             </div>
