@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import moment from 'moment';
 import * as helper from './helper'
 
-const DATE_FORMAT = 'DD/MM/YYYY';
+const DATE_FORMAT = 'DD/MM/YYYY h:mm:ss a';
 
 class DatePickerInput extends React.Component {
     constructor(props) {
@@ -14,17 +14,26 @@ class DatePickerInput extends React.Component {
         };
     }
     componentDidMount() {
-        const { form, name, onChange } = this.props;
+        const { form, name, onChange, isEndDate } = this.props;
         const $el = $(`#${name}`);
-        $el.datetimepicker({
+        const defaultOptions = {
             format: DATE_FORMAT,
+            showClear: true,
             defaultDate: parseInt(this.state.value) ?
                 moment.unix(parseInt(this.state.value)) :
                 ''
-        });
+        };
+
+        const options = isEndDate ?
+            Object.assign({}, defaultOptions, {
+                useCurrent: false,
+            }) :
+            defaultOptions;
+
+        $el.datetimepicker(options);
 
         $el.on('dp.change',  (e) => {
-            const value = e.date.unix() || '';
+            const value = e.date ? e.date.unix() || '' : '';
             onChange && onChange(value);
             form[name] = value;
             this.setState({
