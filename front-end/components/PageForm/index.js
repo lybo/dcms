@@ -156,6 +156,12 @@ class PageForm extends React.Component {
         const templateFields = selectedTemplate ? (
             <div>
                 {selectedTemplate.fields.map((field, i) => {
+                    let additionalSettings = {};
+                    try {
+                        additionalSettings = JSON.parse(field.additionalSettings);
+                    } catch(e) {
+
+                    }
                     if (field.input !== 'rangeDate') {
                         return (
                             <Input key={field.name + i}
@@ -165,6 +171,7 @@ class PageForm extends React.Component {
                                 label={field.label}
                                 name={field.name}
                                 defaultValue={field.defaultValue}
+                                additionalSettings={additionalSettings}
                                 validate={!!!isValid}
                                 isRequired={field.isRequired} />
                         );
@@ -180,6 +187,7 @@ class PageForm extends React.Component {
                                 label={field.label}
                                 name={field.name}
                                 defaultValue={field.defaultValue}
+                                additionalSettings={additionalSettings}
                                 validate={!!!isValid}
                                 isRequired={field.isRequired} />
                         );

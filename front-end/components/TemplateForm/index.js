@@ -113,6 +113,16 @@ class TemplateForm extends React.Component {
         };
     }
 
+    updateFieldSettings(i) {
+        return (evt) => {
+            let fields = this.state.fields;
+            fields[i].additionalSettings = evt.target.value;
+            this.setState({
+                fields
+            });
+        };
+    }
+
     removeField(i) {
         return (evt) => {
             evt.preventDefault();
@@ -130,11 +140,18 @@ class TemplateForm extends React.Component {
         return (evt) => {
             evt.preventDefault();
 
+            let additionalSettings = '';
+            try {
+                additionalSettings = JSON.parse(this.field_additionalSettings.value);
+            } catch(e) {
+            }
+
             let fields = this.state.fields;
             fields.push({
                 name: this.field_name.value,
                 label: this.field_label.value,
                 input: this.field_input.value,
+                additionalSettings: additionalSettings,
                 isRequired: this.field_isRequired.checked,
             });
             this.field_name.value = '';
@@ -210,6 +227,10 @@ class TemplateForm extends React.Component {
                     <div className="form-group">
                         <label>IsRequired</label>
                         <input onChange={this.updateFieldIsRequired(i)} defaultChecked={field.isRequired || false} type="checkbox" className="form-control" name="field-isRequired[i]" placeholder="IsRequired" />
+                    </div>
+                    <div className="form-group">
+                        <label>Settings</label>
+                        <textarea onChange={this.updateFieldSettings(i)} defaultValue={field.additionalSettings || ''} type="text" className="form-control" name="field_additionalSettings[i]" placeholder="Settings" ></textarea>
                     </div>
                     <a href="#" className="btn btn-danger pull-right" onClick={this.removeField(i)}>Remove</a>
                 </div>

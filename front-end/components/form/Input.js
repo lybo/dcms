@@ -15,7 +15,7 @@ class Input extends React.Component {
     render() {
         const { onChange, form, type, label, name, value,
             defaultValue, isRequired, validate,
-            options, emptyValueLabel } = this.props;
+            options, emptyValueLabel, additionalSettings } = this.props;
 
         switch (type) {
             case 'text':
@@ -63,6 +63,7 @@ class Input extends React.Component {
                 return (
                     <DatePickerInput
                         onChange={onChange}
+                        additionalSettings={additionalSettings}
                         value={value}
                         form={form}
                         label={label}
@@ -76,6 +77,7 @@ class Input extends React.Component {
                 const { startDateValue, endDateValue } = this.props;
                 return (
                     <DateRangePickerInput
+                        additionalSettings={additionalSettings}
                         startDateValue={startDateValue}
                         endDateValue={endDateValue}
                         form={form}
