@@ -1,0 +1,5 @@
+TemplateForm:
+    name: 'Name'
+    label: 'Label'
+    input: 'Input'
+    validation: !import ../../configuration/i18n/Validation.yml

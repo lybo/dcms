@@ -12,3 +12,5 @@ Thumbs.db
 node_modules/
 documentation/
 bower_components/
+docs/i18n/conf.js
+docs/conf/conf.js
