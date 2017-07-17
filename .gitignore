@@ -15,6 +15,9 @@ documentation/
 bower_components/
 data/
 
+public/upload/
+.idea/
+
 # Runtime data
 pids
 *.pid

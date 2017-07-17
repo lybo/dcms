@@ -5,6 +5,8 @@ import Spinner from '../Spinner/'
 import { redirect } from 'redux-router-director'
 import '!style!css!less!./style.less'
 import { USER_ROLE } from '../../constants/Generic'
+import i18n from 'yaml-import-loader!./i18n.yml'
+
 
 const INPUTS = [
     'text',
@@ -36,6 +38,7 @@ class TemplateForm extends React.Component {
     constructor(props) {
         super(props);
         const { template } = this.props;
+        const fields = template ? template.fields : [];
         this.state = {
             field: {
                 name: '',
@@ -45,7 +48,7 @@ class TemplateForm extends React.Component {
                 defaultValue: '',
                 options: []
             },
-            fields: template.fields || []
+            fields
         };
     }
 
@@ -176,15 +179,15 @@ class TemplateForm extends React.Component {
         const FieldAdd = (
             <div className="form-inline clearfix">
                 <div className="form-group">
-                    <label>Name</label>
+                    <label>{i18n.TemplateForm.name}</label>
                     <input ref={(ref) => this.field_name = ref} defaultValue={this.state.field.name || ''} type="text" className="form-control" name="field-name" placeholder="Name" />
                 </div>
                 <div className="form-group">
-                    <label>Label</label>
+                    <label>{i18n.TemplateForm.label}</label>
                     <input ref={(ref) => this.field_label = ref} defaultValue={this.state.field.label || ''} type="text" className="form-control" name="field-label" placeholder="Label" />
                 </div>
                 <div className="form-group">
-                    <label>&nbsp;Input</label>
+                    <label>&nbsp;{i18n.TemplateForm.input}</label>
                     <select ref={(ref) => this.field_input = ref} defaultValue={this.state.field.input || ''} className="form-control" name="field-input">
                         <option value="">Select input type</option>
                         {INPUTS.map((inputKey) => {
@@ -206,15 +209,15 @@ class TemplateForm extends React.Component {
             return (
                 <div className="form-inline field-edit" key={`field-${i}`}>
                     <div className="form-group">
-                        <label>Name</label>
+                        <label>{i18n.TemplateForm.name}</label>
                         <input onChange={this.updateFieldName(i)} defaultValue={field.name || ''} type="text" className="form-control" name="field-name[i]" placeholder="Name" />
                     </div>
                     <div className="form-group">
-                        <label>Label</label>
+                        <label>{i18n.TemplateForm.label}</label>
                         <input onChange={this.updateFieldLabel(i)} defaultValue={field.label || ''} type="text" className="form-control" name="field-label[i]" placeholder="Label" />
                     </div>
                     <div className="form-group">
-                        <label>&nbsp;Input</label>
+                        <label>&nbsp;{i18n.TemplateForm.input}</label>
                         <select onChange={this.updateFieldInput(i)} defaultValue={field.input || ''} className="form-control"  name="field-input[i]">
                             <option value="">Select input type</option>
                             {INPUTS.map((inputKey) => {
@@ -302,7 +305,7 @@ class TemplateForm extends React.Component {
 
                             {request.error ? (
                                 <div className="alert alert-danger">
-                                    { 'Some fields are required' }
+                                    {i18n.TemplateForm.validation.Validation.fieldsRequired}
                                 </div>
                             ) : ( '' )}
                             <button type="submit" id="submit" name="submit" className="btn btn-primary pull-right">Save</button>

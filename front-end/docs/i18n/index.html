@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title of the document</title>
+    <script  type="text/javascript"
+             src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+    </script>
+    <script  type="text/javascript"
+             src="conf.js">
+    </script>
+    <style>
+        .datagrid table {
+            border-collapse: collapse;
+            text-align: left;
+            width: 100%;
+        }
+        .datagrid {
+            font: normal 12px/150% Arial, Helvetica, sans-serif;
+            background: #fff;
+            overflow: hidden;
+            border: 1px solid #006699;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+        .datagrid h4 {
+            font-size: 18px;
+            margin: 0;
+            padding: 10px 0 0 0;
+        }
+        .datagrid table td,
+        .datagrid table th {
+            padding: 3px 10px;
+        }
+        .datagrid table thead th {
+            background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F));
+            background: -moz-linear-gradient( center top, #006699 5%, #00557F 100%);
+            filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');
+            background-color: #006699;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: bold;
+            border-left: 1px solid #0070A8;
+        }
+        .datagrid table thead th:first-child {
+            border: none;
+        }
+        .datagrid table tbody td {
+            color: #00496B;
+            border-left: 1px solid #E1EEF4;
+            font-size: 16px;
+            font-weight: normal;
+        }
+        .datagrid table tbody .alt td {
+            background: #E1EEF4;
+            color: #00496B;
+        }
+        .datagrid table tbody td:first-child {
+            border-left: none;
+        }
+        .datagrid table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .datagrid table tfoot td div {
+            border-top: 1px solid #006699;
+            background: #E1EEF4;
+        }
+        .datagrid table tfoot td {
+            padding: 0;
+            font-size: 12px
+        }
+        .datagrid table tfoot td div {
+            padding: 2px;
+        }
+        .datagrid table tfoot td ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-align: right;
+        }
+        .datagrid table tfoot li {
+            display: inline;
+        }
+        .datagrid table tfoot li a {
+            text-decoration: none;
+            display: inline-block;
+            padding: 2px 8px;
+            margin: 1px;
+            color: #FFFFFF;
+            border: 1px solid #006699;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F));
+            background: -moz-linear-gradient( center top, #006699 5%, #00557F 100%);
+            filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');
+            background-color: #006699;
+        }
+        .datagrid table tfoot ul.active,
+        .datagrid table tfoot ul a:hover {
+            text-decoration: none;
+            border-color: #006699;
+            color: #FFFFFF;
+            background: none;
+            background-color: #00557F;
+        }
+        div.dhtmlx_window_active,
+        div.dhx_modal_cover_dv {
+            position: fixed !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="table" class="datagrid">Content of the document......</div>
+    <script >
+        console.log(content);
+        function getJSON2HTML(jsonData) {
+
+            var html = '';
+            var i = 0;
+
+            function getHeaderTemplate(key) {
+                return `<tr><th><h4 id="${key}">${key}</h4></th></tr>`;
+            }
+
+            function getObjectTemplate(className, key, value) {
+                return `<tr class="${className}"><td>${key}</td><td>${value}</td></tr>`;
+            }
+
+            function getHeader2HTML(key, newKey, level) {
+                if (key === '' && level !== 0) {
+                    return getHeaderTemplate(newKey);
+                }
+                return '';
+            }
+
+            function getKey(currentKey, pathKey, level) {
+                if (level === 0) {
+                    return '';
+                }
+
+                return pathKey !== '' ? pathKey + '.' + currentKey : currentKey;
+            }
+
+            function getLinkTemplate(text) {
+                return `<a href="#${text}">${text}</a>`;
+            }
+
+            function getReference(text) {
+                var matches = text.match(/\[\!(\w+)\!\]/g);
+                var reference = matches ?
+                    matches[0].replace('[!', '').replace('!]', '') :
+                    null;
+                return reference;
+            }
+
+            function getClassName(i, className) {
+                return i%2 === 0 ? className : '';
+            }
+
+            function getEntity2HTML(jsonObj, key, level, className) {
+                var newStr = jsonObj;
+                var reference = getReference(jsonObj.toString());
+                if (reference) {
+                    newStr = getLinkTemplate(reference);
+                }
+                if (Array.isArray(jsonObj) && level > 0) {
+                    newStr = JSON.stringify(jsonObj, null, ' ');
+                }
+                return getObjectTemplate(className, key, newStr);
+            }
+
+            function isTraversable(jsonObj, level) {
+                return typeof jsonObj == "object" &&
+                    (
+                        (Array.isArray(jsonObj) && level === 0) ||
+                        (!Array.isArray(jsonObj) && level !== 0)
+                    );
+            }
+
+            function traverse(jsonObj, pathKey, level) {
+                if(isTraversable(jsonObj, level)) {
+                    $.each(jsonObj, function(k,v) {
+                        var newPathKey = getKey(k, pathKey, level);
+                        html += getHeader2HTML(pathKey, newPathKey, level);
+                        traverse(v, newPathKey, level + 1);
+                    });
+                } else {
+                    i++;
+                    var className = getClassName(i, 'alt');
+                    html += getEntity2HTML(jsonObj, pathKey, level, className);
+                }
+            }
+            traverse(jsonData, '', 0);
+
+            return html;
+        }
+
+        var html = getJSON2HTML(content);
+        $('#table').html(`<table>${html}</table>`)
+    </script>
+</body>
+
+</html>

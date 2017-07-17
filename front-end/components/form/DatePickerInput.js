@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment';
 import * as helper from './helper'
+import conf from 'yaml-import-loader!./conf.yml'
 
-const DATE_FORMAT = 'DD/MM/YYYY h:mm:ss a';
+const DATE_FORMAT = conf.DatePickerInput.dateFormat;
 
 class DatePickerInput extends React.Component {
     constructor(props) {

@@ -1,0 +1,2 @@
+DatePickerInput:
+    dateFormat: 'DD/MM/YYYY h:mm:ss a'
