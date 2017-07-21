@@ -12,7 +12,7 @@ export function receiveLogout() {
     return {
         type: types.LOGOUT,
         payload: {}
-    }   
+    }
 }
 
 export function fetchLogout() {
@@ -26,11 +26,11 @@ export function fetchLogout() {
                     dispatch(requests.setErrorMessage(data.error, requestName));
                 } else {
                     dispatch(requests.setErrorMessage('', requestName));
-                    dispatch(receiveLogout()); 
-                } 
+                    dispatch(receiveLogout());
+                }
             })
             .catch((error) => {
-                dispatch(receiveLogout()); 
+                dispatch(receiveLogout());
                 dispatch(requests.newRequest(false, requestName));
                 dispatch(requests.setErrorMessage(error.message, requestName));
             });
@@ -42,7 +42,7 @@ export function receiveLogin(data) {
     return {
         type: types.LOGIN,
         payload: data
-    }   
+    }
 }
 
 export function fetchLogin(email, password, success, fail) {
@@ -57,10 +57,10 @@ export function fetchLogin(email, password, success, fail) {
                     fail && fail();
                 } else {
                     dispatch(requests.setErrorMessage('', requestName));
-                    dispatch(receiveLogin(data)); 
+                    dispatch(receiveLogin(data));
 
                     success && success();
-                } 
+                }
             })
             .catch((error) => {
                 dispatch(requests.newRequest(false, requestName));
@@ -75,7 +75,7 @@ export function receiveAddUser(data) {
     return {
         type: types.ADD_USER,
         payload: data
-    }   
+    }
 }
 
 export function fetchAddUser(email, password, role, success, fail) {
@@ -90,10 +90,10 @@ export function fetchAddUser(email, password, role, success, fail) {
                     fail && fail();
                 } else {
                     dispatch(requests.setErrorMessage('', requestName));
-                    dispatch(receiveAddUser(data)); 
+                    dispatch(receiveAddUser(data));
 
                     success && success();
-                } 
+                }
             })
             .catch((error) => {
                 dispatch(requests.newRequest(false, requestName));
@@ -109,7 +109,7 @@ export function receivePopulateUsers(data) {
     return {
         type: types.POPULATE_USERS,
         payload: data
-    }   
+    }
 }
 
 export function fetchPopulateUsers(success, fail) {
@@ -124,10 +124,10 @@ export function fetchPopulateUsers(success, fail) {
                     fail && fail();
                 } else {
                     dispatch(requests.setErrorMessage('', requestName));
-                    dispatch(receivePopulateUsers(data)); 
+                    dispatch(receivePopulateUsers(data));
 
                     success && success();
-                } 
+                }
             })
             .catch((error) => {
                 dispatch(requests.newRequest(false, requestName));
@@ -142,7 +142,7 @@ export function receiveAddUser(data) {
     return {
         type: types.ADD_USER,
         payload: data
-    }   
+    }
 }
 
 export function fetchAddUser(user, success, fail) {
@@ -157,10 +157,10 @@ export function fetchAddUser(user, success, fail) {
                     fail && fail();
                 } else {
                     dispatch(requests.setErrorMessage('', requestName));
-                    dispatch(receiveAddUser(data)); 
+                    dispatch(receiveAddUser(data));
 
                     success && success();
-                } 
+                }
             })
             .catch((error) => {
                 dispatch(requests.newRequest(false, requestName));
@@ -175,7 +175,7 @@ export function receiveUpdateUser(data) {
     return {
         type: types.EDIT_USER,
         payload: data
-    }   
+    }
 }
 
 export function fetchUpdateUser(user, success, fail) {
@@ -190,10 +190,10 @@ export function fetchUpdateUser(user, success, fail) {
                     fail && fail();
                 } else {
                     dispatch(requests.setErrorMessage('', requestName));
-                    dispatch(receiveUpdateUser(data)); 
+                    dispatch(receiveUpdateUser(data));
 
                     success && success();
-                } 
+                }
             })
             .catch((error) => {
                 dispatch(requests.newRequest(false, requestName));
@@ -208,7 +208,7 @@ export function receiveDeleteUser(data) {
     return {
         type: types.DELETE_USER,
         payload: data
-    }   
+    }
 }
 
 export function fetchDeleteUser(userId, success, fail) {
@@ -223,10 +223,10 @@ export function fetchDeleteUser(userId, success, fail) {
                     fail && fail();
                 } else {
                     dispatch(requests.setErrorMessage('', requestName));
-                    dispatch(receiveDeleteUser(userId)); 
+                    dispatch(receiveDeleteUser(userId));
 
                     success && success();
-                } 
+                }
             })
             .catch((error) => {
                 dispatch(requests.newRequest(false, requestName));

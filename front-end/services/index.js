@@ -1,227 +1,77 @@
-export function login(email, password) {
-    return new Promise(function(resolve, reject) {
-        dpd.users.login({
-            'username': email, 
-            'password': password
-        }, function(user, err) {
-            if (err) {
-                reject(err);
-                return;
-            };
-            dpd.users.me(function(me) {
-                me.email = me.username;
-                resolve(me);
-            });
-        });
+import * as integration from './dpdIntegration/';
+
+const getAllowedKeys = (keys = []) => (obj = {}) => {
+    let trimmedObj = {};
+    keys.forEach((key) => {
+        trimmedObj[key] = obj[key];
     });
+
+    return trimmedObj;
+};
+
+//------------------ USER
+export function login(email, password) {
+    return integration.loginAndGetAuthUser(email, password);
 }
 
 export function logout() {
-    return new Promise(function(resolve, reject) {
-        dpd.users.logout(function(err) {
-            if (err) {
-                reject(err);
-                return;
-            };
-            resolve();
-        });
-    });
+    return integration.logout();
 }
 
 export function getUsers() {
-    return new Promise(function(resolve, reject) {
-        dpd.users.get(function (users, err) {
-            if (err) {
-                reject(err);
-                return;
-            };
-            resolve(users.map((user) => {
-                return {
-                    id: user.id,
-                    email: user.username,
-                    role: user.role
-                };
-            }));
-        });
-    });
+    return integration.getUsers();
 }
 
 export function addUser(user) {
-    return new Promise(function(resolve, reject) {
-        dpd.users.post({
-            'username': user.email, 
-            'password': user.password,
-            'role': user.role
-        }, function(user, err) {
-            if (err) {
-                reject(err);
-                return;
-            };
-            resolve(user);
-        });
-    });
+    const getObj = getAllowedKeys([
+        'email',
+        'password',
+        'role',
+    ]);
+    return integration.addUser(
+        getObj(user)
+    );
 }
 
 export function updateUser(user) {
-    return new Promise(function(resolve, reject) {
-        let userData = { 
-            ...user,
-            username: user.email
-        };
-        
-        delete userData.id;
-        delete userData.email;
-
-        dpd.users.put(user.id,
-            userData, 
-            function(user, err) {
-                if (err) {
-                    reject(err);
-                    return;
-                };
-                resolve({ 
-                    ...user,
-                    email: user.username
-                });
-            });
-    });
+    return integration.updateUser(user);
 }
 
 export function deleteUser(userId) {
-    return new Promise(function(resolve, reject) {
-        dpd.users.del(userId, function(result) {
-            if (!result.count) {
-                reject(err);
-                return;
-            };
-            resolve(userId);
-        });
-    });
+    return integration.deleteUser(userId);
 }
 
 //------------------ PAGE
 export function getPages() {
-    return new Promise(function(resolve, reject) {
-        dpd.pages.get(function (pages, err) {
-            if (err) {
-                reject(err);
-                return;
-            };
-            resolve(pages);
-        });
-    });
+    return integration.getPages();
 }
 
 export function addPage(page) {
-    return new Promise(function(resolve, reject) {
-        let pageData = { 
-            ...page
-        };
-        
-        delete pageData.id;
-
-        dpd.pages.post(pageData, function(page, err) {
-            if (err) {
-                reject(err);
-                return;
-            };
-            resolve(page);
-        });
-    });
+    return integration.addPage(page);
 }
 
 export function updatePage(page) {
-    return new Promise(function(resolve, reject) {
-        let pageData = { 
-            ...page
-        };
-        
-        delete pageData.id;
-
-        dpd.pages.put(page.id,
-            pageData, 
-            function(page, err) {
-                if (err) {
-                    reject(err);
-                    return;
-                };
-                resolve(page);
-            });
-    });
+    return integration.updatePage(page);
 }
 
 export function deletePage(pageId) {
-    return new Promise(function(resolve, reject) {
-        dpd.pages.del(pageId, function(result) {
-            if (!result.count) {
-                reject(err);
-                return;
-            };
-            resolve(pageId);
-        });
-    });
+    return integration.deletePage(pageId);
 }
 
 //------------------ TEMPLATE
 export function getTemplates() {
-    return new Promise(function(resolve, reject) {
-        dpd.templates.get(function (templates, err) {
-            if (err) {
-                reject(err);
-                return;
-            };
-            resolve(templates);
-        });
-    });
+    return integration.getTemplates();
 }
 
 export function addTemplate(template) {
-    return new Promise(function(resolve, reject) {
-        let templateData = { 
-            ...template
-        };
-        
-        delete templateData.id;
-
-        dpd.templates.post(templateData, function(template, err) {
-            if (err) {
-                reject(err);
-                return;
-            };
-            resolve(template);
-        });
-    });
+    return integration.addTemplate(template);
 }
 
 export function updateTemplate(template) {
-    return new Promise(function(resolve, reject) {
-        let templateData = { 
-            ...template
-        };
-        
-        delete templateData.id;
-
-        dpd.templates.put(template.id,
-            templateData, 
-            function(template, err) {
-                if (err) {
-                    reject(err);
-                    return;
-                };
-                resolve(template);
-            });
-    });
+    return integration.updateTemplate(template);
 }
 
 export function deleteTemplate(templateId) {
-    return new Promise(function(resolve, reject) {
-        dpd.templates.del(templateId, function(result) {
-            if (!result.count) {
-                reject(err);
-                return;
-            };
-            resolve(templateId);
-        });
-    });
+    return integration.deleteTemplate(templateId);
 }
 

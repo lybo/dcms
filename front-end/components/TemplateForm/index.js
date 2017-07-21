@@ -38,7 +38,9 @@ class TemplateForm extends React.Component {
     constructor(props) {
         super(props);
         const { template } = this.props;
-        const fields = template ? template.fields : [];
+        const fields = template ?
+            template.fields :
+            [];
         this.state = {
             field: {
                 name: '',
@@ -48,7 +50,7 @@ class TemplateForm extends React.Component {
                 defaultValue: '',
                 options: []
             },
-            fields
+            fields: fields || []
         };
     }
 
