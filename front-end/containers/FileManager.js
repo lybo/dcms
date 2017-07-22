@@ -1,6 +1,7 @@
 import FileManager from '../components/FileManager'
 import { connect } from 'react-redux'
-import { receivePopulateFiles, fetchAddFile, fetchDeleteFile } from '../actions/file'
+import { populateFiles } from '../actions/file'
+import { addFile, deleteFile } from '../epics/file'
 import { PAGE_TITLE } from '../constants/Generic'
 
 export default connect(
