@@ -4,8 +4,8 @@ export function newRequest(payload, namespace) {
     return {
         type: types.SET_STATUS_REQUEST,
         namespace,
-        payload 
-    };   
+        payload
+    };
 }
 
 export function setErrorMessage(payload, namespace) {
@@ -13,7 +13,7 @@ export function setErrorMessage(payload, namespace) {
         type: types.SET_ERROR_REQUEST,
         namespace,
         payload
-    };   
+    };
 }
 
 
