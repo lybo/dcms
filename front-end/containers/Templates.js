@@ -1,7 +1,7 @@
 import Templates from '../components/Templates/'
 import { connect } from 'react-redux'
-import { logout } from '../epics/user'
-import { populateTemplates, deleteTemplate } from '../epics/template'
+import { requestLogout } from '../epics/auth'
+import { requestPopulateTemplates, requestDeleteTemplate } from '../epics/template'
 import { PAGE_TITLE } from '../constants/Generic'
 
 export default connect(
@@ -16,13 +16,13 @@ export default connect(
     (dispatch) => {
         return {
             onLoadTemplates: () => {
-                dispatch(populateTemplates());
+                dispatch(requestPopulateTemplates());
             },
             onDelete: (templateId) => {
-                dispatch(deleteTemplate(templateId));
+                dispatch(requestDeleteTemplate(templateId));
             },
             onClickLogout: () => {
-                dispatch(logout());
+                dispatch(requestLogout());
             }
         }
     }

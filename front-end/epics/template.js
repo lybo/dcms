@@ -5,7 +5,7 @@ import * as actions from '../actions/template'
 const requestName = 'template';
 
 //ADD_TEMPLATE
-export function addTemplate(template, success, fail) {
+export function requestAddTemplate(template, success, fail) {
     return dispatch => {
         dispatch(requests.newRequest(true, requestName));
         api.addTemplate(template)
@@ -30,7 +30,7 @@ export function addTemplate(template, success, fail) {
 }
 
 //POPULATE_TEMPLATES
-export function populateTemplates(success, fail) {
+export function requestPopulateTemplates(success, fail) {
     return dispatch => {
         dispatch(requests.newRequest(true, requestName));
         api.getTemplates()
@@ -55,7 +55,7 @@ export function populateTemplates(success, fail) {
 }
 
 //EDIT_TEMPLATE
-export function updateTemplate(template, success, fail) {
+export function requestUpdateTemplate(template, success, fail) {
     return dispatch => {
         dispatch(requests.newRequest(true, requestName));
         api.updateTemplate(template)
@@ -80,7 +80,7 @@ export function updateTemplate(template, success, fail) {
 }
 
 //DELETE_TEMPLATE
-export function deleteTemplate(templateId, success, fail) {
+export function requestDeleteTemplate(templateId, success, fail) {
     return dispatch => {
         dispatch(requests.newRequest(true, requestName));
         api.deleteTemplate(templateId)

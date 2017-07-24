@@ -1,17 +1,17 @@
 import Login from '../components/Login/'
 import { connect } from 'react-redux'
-import { login } from '../epics/user'
+import { requestLogin } from '../epics/auth'
 
 export default connect(
     (state) => {
         return {
-            request: state.requests.login
+            request: state.requests.auth
         };
     },
     (dispatch) => {
         return {
             onSubmit: (email, password, success, fail) => {
-                dispatch(login(email, password, success, fail));
+                dispatch(requestLogin(email, password, success, fail));
             }
         }
     }

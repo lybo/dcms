@@ -2,58 +2,10 @@ import * as api from '../services/index'
 import * as requests from '../actions/requests'
 import * as actions from '../actions/user'
 
-//LOGOUT
-export function logout() {
-    const requestName = 'logout';
-    return dispatch => {
-        dispatch(requests.newRequest(true, requestName));
-        api.logout()
-            .then(() => {
-                dispatch(requests.newRequest(false, requestName));
-                if (data.error) {
-                    dispatch(requests.setErrorMessage(data.error, requestName));
-                } else {
-                    dispatch(requests.setErrorMessage('', requestName));
-                    dispatch(actions.logout());
-                }
-            })
-            .catch((error) => {
-                dispatch(actions.logout());
-                dispatch(requests.newRequest(false, requestName));
-                dispatch(requests.setErrorMessage(error.message, requestName));
-            });
-    }
-}
-
-//LOGIN
-export function login(email, password, success, fail) {
-    const requestName = 'login';
-    return dispatch => {
-        dispatch(requests.newRequest(true, requestName));
-        api.login(email, password)
-            .then((data) => {
-                dispatch(requests.newRequest(false, requestName));
-                if (data.error) {
-                    dispatch(requests.setErrorMessage(data.error, requestName));
-                    fail && fail();
-                } else {
-                    dispatch(requests.setErrorMessage('', requestName));
-                    dispatch(actions.login(data));
-
-                    success && success();
-                }
-            })
-            .catch((error) => {
-                dispatch(requests.newRequest(false, requestName));
-                dispatch(requests.setErrorMessage(error.message, requestName));
-                fail && fail();
-            });
-    }
-}
+const requestName = 'user';
 
 //POPULATE_USERS
-export function populateUsers(success, fail) {
-    const requestName = 'login';
+export function requestPopulateUsers(success, fail) {
     return dispatch => {
         dispatch(requests.newRequest(true, requestName));
         api.getUsers()
@@ -78,8 +30,7 @@ export function populateUsers(success, fail) {
 }
 
 //ADD_USER
-export function addUser(user, success, fail) {
-    const requestName = 'user';
+export function requestAddUser(user, success, fail) {
     return dispatch => {
         dispatch(requests.newRequest(true, requestName));
         api.addUser(user)
@@ -104,8 +55,7 @@ export function addUser(user, success, fail) {
 }
 
 //EDIT_USER
-export function updateUser(user, success, fail) {
-    const requestName = 'user';
+export function requestUpdateUser(user, success, fail) {
     return dispatch => {
         dispatch(requests.newRequest(true, requestName));
         api.updateUser(user)
@@ -130,8 +80,7 @@ export function updateUser(user, success, fail) {
 }
 
 //DELETE_USER
-export function deleteUser(userId, success, fail) {
-    const requestName = 'user';
+export function requestDeleteUser(userId, success, fail) {
     return dispatch => {
         dispatch(requests.newRequest(true, requestName));
         api.deleteUser(userId)

@@ -1,6 +1,7 @@
 import Users from '../components/Users/'
 import { connect } from 'react-redux'
-import { logout,  populateUsers, deleteUser } from '../epics/user'
+import { requestLogout } from '../epics/auth'
+import { requestPopulateUsers, requestDeleteUser } from '../epics/user'
 import { PAGE_TITLE } from '../constants/Generic'
 
 export default connect(
@@ -15,13 +16,13 @@ export default connect(
     (dispatch) => {
         return {
             onLoadUsers: () => {
-                dispatch(populateUsers());
+                dispatch(requestPopulateUsers());
             },
             onDelete: (userId) => {
-                dispatch(deleteUser(userId));
+                dispatch(requestDeleteUser(userId));
             },
             onClickLogout: () => {
-                dispatch(logout());
+                dispatch(requestLogout());
             }
         }
     }

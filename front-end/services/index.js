@@ -9,7 +9,7 @@ const getAllowedKeys = (keys = []) => (obj = {}) => {
     return trimmedObj;
 };
 
-//------------------ USER
+//AUTH
 export function login(email, password) {
     return integration.loginAndGetAuthUser(email, password);
 }
@@ -18,6 +18,7 @@ export function logout() {
     return integration.logout();
 }
 
+//USER
 export function getUsers() {
     return integration.getUsers();
 }
@@ -41,7 +42,7 @@ export function deleteUser(userId) {
     return integration.deleteUser(userId);
 }
 
-//------------------ PAGE
+//PAGE
 export function getPages() {
     return integration.getPages();
 }
@@ -58,7 +59,7 @@ export function deletePage(pageId) {
     return integration.deletePage(pageId);
 }
 
-//------------------ TEMPLATE
+//TEMPLATE
 export function getTemplates() {
     return integration.getTemplates();
 }

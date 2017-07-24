@@ -1,6 +1,7 @@
 import SectionUserForm from '../components/SectionUserForm/'
 import { connect } from 'react-redux'
-import { logout, populateUsers, addUser, updateUser } from '../epics/user'
+import { requestLogout } from '../epics/auth'
+import { requestPopulateUsers, requestAddUser, requestUpdateUser } from '../epics/user'
 import { PAGE_TITLE } from '../constants/Generic'
 
 export default connect(
@@ -27,16 +28,16 @@ export default connect(
     (dispatch) => {
         return {
             onLoadUsers: () => {
-                dispatch(populateUsers());
+                dispatch(requestPopulateUsers());
             },
             onClickLogout: () => {
-                dispatch(logout());
+                dispatch(requestLogout());
             },
             onAddUser: (user, success, fail) => {
-                dispatch(addUser(user, success, fail));
+                dispatch(requestAddUser(user, success, fail));
             },
             onUpdateUser: (user, success, fail) => {
-                dispatch(updateUser(user, success, fail));
+                dispatch(requestUpdateUser(user, success, fail));
             }
         }
     }

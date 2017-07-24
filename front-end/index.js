@@ -6,12 +6,12 @@ import App from './containers/App'
 import configureStore from './store/configureStore'
 import router from 'redux-router-director'
 import DevTools from './containers/DevTools'
-import { populateTemplates } from './epics/template'
+import { requestPopulateTemplates } from './epics/template'
 
 const store = configureStore()
 router.setStore(store)
 
-store.dispatch(populateTemplates());
+store.dispatch(requestPopulateTemplates());
 
 render(
     <Provider store={store}>
