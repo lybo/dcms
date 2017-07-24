@@ -2,9 +2,10 @@ import * as api from '../services/index'
 import * as requests from '../actions/requests'
 import * as actions from '../actions/file'
 
+const requestName = 'file';
+
 //POPULATE_FILES
 export function populateFiles(success, fail) {
-    const requestName = 'login';
     return dispatch => {
         dispatch(requests.newRequest(true, requestName));
         api.getFiles()
@@ -30,7 +31,6 @@ export function populateFiles(success, fail) {
 
 //ADD_FILE
 export function addFile(file, success, fail) {
-    const requestName = 'file';
     return dispatch => {
         dispatch(requests.newRequest(true, requestName));
         api.addFile(file)
@@ -56,7 +56,6 @@ export function addFile(file, success, fail) {
 
 //EDIT_FILE
 export function updateFile(file, success, fail) {
-    const requestName = 'file';
     return dispatch => {
         dispatch(requests.newRequest(true, requestName));
         api.updateFile(file)
@@ -82,7 +81,6 @@ export function updateFile(file, success, fail) {
 
 //DELETE_FILE
 export function deleteFile(fileId, success, fail) {
-    const requestName = 'file';
     return dispatch => {
         dispatch(requests.newRequest(true, requestName));
         api.deleteFile(fileId)

@@ -1,6 +1,6 @@
 import Dashboard from '../components/Dashboard'
 import { connect } from 'react-redux'
-import { logout } from '../epics/user'
+import { requestLogout } from '../epics/auth'
 import { PAGE_TITLE } from '../constants/Generic'
 
 export default connect(
@@ -13,7 +13,7 @@ export default connect(
     (dispatch) => {
         return {
             onClickLogout: () => {
-                dispatch(logout());
+                dispatch(requestLogout());
             }
         }
     }

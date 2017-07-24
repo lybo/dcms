@@ -1,12 +1,7 @@
 import * as types from '../constants/ActionTypes'
 
 const initialState = {
-    login: {
-        counter: 0,
-        status: false,
-        error: ''
-    },
-    logout: {
+    auth: {
         counter: 0,
         status: false,
         error: ''
@@ -52,7 +47,7 @@ const request = (state = {}, action = { type: ''}) => {
             return {
                 ...state
             }
-        default: 
+        default:
             return state;
     }
 };
@@ -75,8 +70,8 @@ export default function requests(state = initialState, action = { type: '', name
             return {
                 ...newState
             }
-        default: 
+        default:
             return state;
-    }  
+    }
 };
 

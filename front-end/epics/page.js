@@ -5,7 +5,7 @@ import * as actions from '../actions/page'
 const requestName = 'page';
 
 //POPULATE_PAGES
-export function populatePages(success, fail) {
+export function requestPopulatePages(success, fail) {
     return dispatch => {
         dispatch(requests.newRequest(true, requestName));
         api.getPages()
@@ -30,7 +30,7 @@ export function populatePages(success, fail) {
 }
 
 //ADD_PAGE
-export function addPage(page, success, fail) {
+export function requestAddPage(page, success, fail) {
     return dispatch => {
         dispatch(requests.newRequest(true, requestName));
         api.addPage(page)
@@ -55,7 +55,7 @@ export function addPage(page, success, fail) {
 }
 
 //EDIT_PAGE
-export function updatePage(page, success, fail) {
+export function requestUpdatePage(page, success, fail) {
     return dispatch => {
         dispatch(requests.newRequest(true, requestName));
         api.updatePage(page)
@@ -80,7 +80,7 @@ export function updatePage(page, success, fail) {
 }
 
 //DELETE_PAGE
-export function deletePage(pageId, success, fail) {
+export function requestDeletePage(pageId, success, fail) {
     return dispatch => {
         dispatch(requests.newRequest(true, requestName));
         api.deletePage(pageId)

@@ -1,7 +1,7 @@
 import Pages from '../components/Pages/'
 import { connect } from 'react-redux'
-import { logout } from '../epics/user'
-import { populatePages, updatePage, deletePage } from '../epics/page'
+import { requestLogout } from '../epics/auth'
+import { requestPopulatePages, requestUpdatePage, requestDeletePage } from '../epics/page'
 import { PAGE_TITLE } from '../constants/Generic'
 
 export default connect(
@@ -17,16 +17,16 @@ export default connect(
     (dispatch) => {
         return {
             onLoadPages: () => {
-                dispatch(populatePages());
+                dispatch(requestPopulatePages());
             },
             onSort: (page, success, fail) => {
-                dispatch(updatePage(page, success, fail));
+                dispatch(requestUpdatePage(page, success, fail));
             },
             onDelete: (pageId) => {
-                dispatch(deletePage(pageId));
+                dispatch(requestDeletePage(pageId));
             },
             onClickLogout: () => {
-                dispatch(logout());
+                dispatch(requestLogout());
             }
         }
     }
