@@ -1,7 +1,7 @@
 import Pages from '../components/Pages/'
 import { connect } from 'react-redux'
-import { requestLogout } from '../epics/auth'
-import { requestPopulatePages, requestUpdatePage, requestDeletePage } from '../epics/page'
+import { requestLogout } from '../actions/auth'
+import { requestPopulatePages, requestUpdatePage, requestDeletePage } from '../actions/page'
 import { PAGE_TITLE } from '../constants/Generic'
 
 export default connect(

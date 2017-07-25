@@ -15,7 +15,7 @@ export function login(email, password) {
     });
 }
 
-export function getAuthUser(email, password) {
+export function getAuthUser() {
     return new Promise(function(resolve, reject) {
         const promiseHandler = dpdHandler(resolve, reject);
 
@@ -34,7 +34,9 @@ export function loginAndGetAuthUser(email, password) {
             const user = yield getAuthUser();
             return user;
         } catch (e) {
-            throw e;
+            throw {
+                error: e.message || e
+            };
         }
     });
 }

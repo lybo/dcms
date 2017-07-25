@@ -15,7 +15,7 @@ const requiredFields = ['title', 'templateId'];
 class PageForm extends React.Component {
     constructor(props) {
         super(props);
-        const { page, templates } = this.props;
+        const { page, templates, request } = this.props;
 
         this.state = {
             // publicationStartDate: page.publicationStartDate,
@@ -27,10 +27,15 @@ class PageForm extends React.Component {
 
         this.fields = {};
         this.templateFields = {};
+        this.requestNumber = request.counter;
     }
 
     componentWillMount() {
         const { onLoadUsers } = this.props;
+    }
+
+    componentWilliUnmount() {
+        this.timeout && clearTimeout(this.timeout);
     }
 
     componentDidMount() {
@@ -56,7 +61,31 @@ class PageForm extends React.Component {
         // });
     }
 
-    componentWillUnmount() {
+    componentWillReceiveProps(nextProps) {
+        const { request } = nextProps;
+        const endOfRequest = request.counter !== this.requestNumber && !request.status;
+        const validResponse = endOfRequest && request.response;
+        if (validResponse) {
+            this.onResponse(request.response);
+        }
+    }
+
+    onResponse(response) {
+        const { goToList } = this;
+        const { pageId } = response;
+        if (pageId !== '0' && !goToList) {
+            this.setState({
+                isSaved: true
+            });
+            this.timeout = setTimeout(() => {
+                this.setState({
+                    isSaved: false
+                });
+            }, 3000);
+            return;
+        }
+        !goToList && redirect(`/pages/${pageId}`);
+        goToList && redirect(`/pages`);
     }
 
     onSubmit(evt) {
@@ -68,7 +97,7 @@ class PageForm extends React.Component {
     }
 
     onSave(goToList) {
-        const { page, onAddPage, onUpdatePage, pagesNumber, onLoadPages } = this.props;
+        const { page, onAddPage, onUpdatePage, pagesNumber, onLoadPages, request } = this.props;
         const onSave = page.id !== '0' ? onUpdatePage : onAddPage;
         return (evt) => {
             evt.preventDefault();
@@ -112,6 +141,9 @@ class PageForm extends React.Component {
                 return;
             }
 
+            this.requestNumber = request.counter;
+            this.goToList = goToList;
+
             onSave({
                     ...page,
                     content,
@@ -122,21 +154,6 @@ class PageForm extends React.Component {
                     // publicationEndDate: moment(this.endInput.value, DATE_FORMAT).unix(),
                     // zone: this.zone.value,
                     templateId: this.fields['templateId'],
-                },
-                (id) => {
-                    if (page.id !== '0' && !goToList) {
-                        this.setState({
-                            isSaved: true
-                        });
-                        setTimeout(() => {
-                            this.setState({
-                                isSaved: false
-                            });
-                        }, 3000);
-                        return;
-                    }
-                    !goToList && redirect(`/pages/${id}`);
-                    goToList && redirect(`/pages`);
                 });
         };
     }

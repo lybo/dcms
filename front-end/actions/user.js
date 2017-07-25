@@ -5,22 +5,6 @@
 
 import * as types from '../constants/ActionTypes'
 
-//LOGOUT
-export function logout() {
-    return {
-        type: types.LOGOUT,
-        payload: {}
-    }
-}
-
-//LOGIN
-export function login(data) {
-    return {
-        type: types.LOGIN,
-        payload: data
-    }
-}
-
 //POPULATE_USERS
 export function populateUsers(data) {
     return {
@@ -54,3 +38,36 @@ export function deleteUser(data) {
         payload: data
     }
 }
+
+//REQUEST_ADD_USER
+export function requestAddUser(data) {
+    return {
+        type: types.REQUEST_ADD_USER,
+        payload: data
+    }
+}
+
+//REQUEST_POPULATE_USERS
+export function requestPopulateUsers(data) {
+    return {
+        type: types.REQUEST_POPULATE_USERS,
+        payload: data
+    }
+}
+
+//REQUEST_EDIT_USER
+export function requestUpdateUser(data) {
+    return {
+        type: types.REQUEST_EDIT_USER,
+        payload: data
+    }
+}
+
+//REQUEST_DELETE_USER
+export function requestDeleteUser(data) {
+    return {
+        type: types.REQUEST_DELETE_USER,
+        payload: data
+    }
+}
+

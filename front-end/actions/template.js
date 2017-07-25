@@ -38,3 +38,34 @@ export function deleteTemplate(data) {
     }
 }
 
+//REQUEST_ADD_TEMPLATE
+export function requestAddTemplate(data) {
+    return {
+        type: types.REQUEST_ADD_TEMPLATE,
+        payload: data
+    }
+}
+
+//REQUEST_POPULATE_TEMPLATES
+export function requestPopulateTemplates(data) {
+    return {
+        type: types.REQUEST_POPULATE_TEMPLATES,
+        payload: data
+    }
+}
+
+//REQUEST_EDIT_TEMPLATE
+export function requestUpdateTemplate(data) {
+    return {
+        type: types.REQUEST_EDIT_TEMPLATE,
+        payload: data
+    }
+}
+
+//REQUEST_DELETE_TEMPLATE
+export function requestDeleteTemplate(data) {
+    return {
+        type: types.REQUEST_DELETE_TEMPLATE,
+        payload: data
+    }
+}

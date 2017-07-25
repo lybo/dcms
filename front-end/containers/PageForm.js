@@ -1,7 +1,7 @@
 import PageForm from '../components/PageForm/'
 import { connect } from 'react-redux'
-import { requestLogout } from '../epics/auth'
-import { requestPopulatePages, requestAddPage, requestUpdatePage } from '../epics/page'
+import { requestLogout } from '../actions/auth'
+import { requestPopulatePages, requestAddPage, requestUpdatePage } from '../actions/page'
 import { PAGE_TITLE } from '../constants/Generic'
 
 export default connect(
@@ -31,17 +31,17 @@ export default connect(
     },
     (dispatch) => {
         return {
-            onLoadPages: (success, fail) => {
-                dispatch(requestPopulatePages(success, fail));
+            onLoadPages: () => {
+                dispatch(requestPopulatePages());
             },
             onClickLogout: () => {
                 dispatch(requestLogout());
             },
-            onAddPage: (page, success, fail) => {
-                dispatch(requestAddPage(page, success, fail));
+            onAddPage: (page) => {
+                dispatch(requestAddPage(page));
             },
-            onUpdatePage: (page, success, fail) => {
-                dispatch(requestUpdatePage(page, success, fail));
+            onUpdatePage: (page) => {
+                dispatch(requestUpdatePage(page));
             }
         }
     }

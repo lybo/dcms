@@ -1,6 +1,6 @@
 import Dashboard from '../components/Dashboard'
 import { connect } from 'react-redux'
-import { requestLogout } from '../epics/auth'
+import { requestLogout } from '../actions/auth'
 import { PAGE_TITLE } from '../constants/Generic'
 
 export default connect(

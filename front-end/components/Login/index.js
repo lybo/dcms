@@ -8,32 +8,55 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
 
+        const { request } = this.props;
+
         this.emailValue = '';
+        this.requestNumber = request.counter;
     }
 
     componentDidMount() {
         this.email && this.email.focus();
     }
 
-    render() {
-        const { request, onSubmit } = this.props;
-        const _onSubmit = (evt) => {
+    componentWillReceiveProps(nextProps) {
+        const { request } = nextProps;
+        this.onSubmitResponseHandler(request);
+    }
+
+    onSubmitResponseHandler(request) {
+        const isDiffRequestNumber = this.isDiffRequestNumber(request.counter);
+
+        if (isDiffRequestNumber && !request.status) {
+            redirect(window.urlAttempt || '/dashboard');
+        } else if (isDiffRequestNumber) {
+            this.email.value = this.emailValue;
+            this.password.value = '';
+        }
+    }
+
+    isDiffRequestNumber(requestCounter) {
+        return requestCounter !== this.requestNumber
+    }
+
+    onSubmit() {
+        const { onSubmit } = this.props;
+
+        return (evt) => {
+            const { request, onSubmit } = this.props;
             evt.preventDefault();
 
+            //cach the email value
             this.emailValue = this.email.value;
+
             onSubmit(
                 this.email.value,
                 this.password.value,
-                () => {
-                    this.email.value = '';
-                    this.password.value = '';
-                    redirect(window.urlAttempt || '/dashboard');
-                },
-                () => {
-                    this.email.value = this.emailValue;
-                    this.password.value = '';
-                });
-        }
+            );
+        };
+    }
+
+    render() {
+        const { request } = this.props;
 
         return !request.status ? (
             <div className="container login" >
@@ -43,7 +66,7 @@ class Login extends React.Component {
                             <h3 className="panel-title">Log In</h3>
                         </div>
                         <div className="panel-body">
-                            <form role="form" onSubmit={_onSubmit}>
+                            <form role="form" onSubmit={this.onSubmit()}>
 
                                 <fieldset>
                                     <div className="form-group">

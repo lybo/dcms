@@ -6,7 +6,8 @@ import App from './containers/App'
 import configureStore from './store/configureStore'
 import router from 'redux-router-director'
 import DevTools from './containers/DevTools'
-import { requestPopulateTemplates } from './epics/template'
+import { requestPopulateTemplates } from './actions/template'
+import 'rxjs'
 
 const store = configureStore()
 router.setStore(store)

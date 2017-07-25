@@ -1,7 +1,7 @@
 import Users from '../components/Users/'
 import { connect } from 'react-redux'
-import { requestLogout } from '../epics/auth'
-import { requestPopulateUsers, requestDeleteUser } from '../epics/user'
+import { requestLogout } from '../actions/auth'
+import { requestPopulateUsers, requestDeleteUser } from '../actions/user'
 import { PAGE_TITLE } from '../constants/Generic'
 
 export default connect(
