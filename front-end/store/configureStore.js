@@ -23,13 +23,18 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from '../reducers';
 import thunk from 'redux-thunk'
+import { createEpicMiddleware } from 'redux-observable';
+import rootEpic from '../epics'
 import DevTools from '../containers/DevTools';
 import { persistState } from 'redux-devtools';
+
+const epicMiddleware = createEpicMiddleware(rootEpic);
 
 const finalCreateStore = compose(
     // Middleware you want to use in development:
     applyMiddleware(
-        thunk
+        epicMiddleware,
+        thunk,
     ),
     // Required! Enable Redux DevTools with the monitors you chose
     DevTools.instrument(),
@@ -50,7 +55,7 @@ export default function configureStore(initialState) {
     // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
     if (module.hot) {
         module.hot.accept('../reducers', () =>
-        store.replaceReducer(require('../reducers')/*.default if you use Babel 6+ */)
+            store.replaceReducer(require('../reducers')/*.default if you use Babel 6+ */)
         );
     }
 

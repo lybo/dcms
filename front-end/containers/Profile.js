@@ -1,6 +1,6 @@
 import SectionProfile from '../components/SectionProfile/'
 import { connect } from 'react-redux'
-import { requestLogout } from '../epics/auth'
+import { requestLogout } from '../actions/auth'
 import { requestPopulateUsers, requestAddUser, requestUpdateUser } from '../epics/user'
 import { PAGE_TITLE } from '../constants/Generic'
 

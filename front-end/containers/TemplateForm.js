@@ -1,7 +1,7 @@
 import TemplateForm from '../components/TemplateForm/'
 import { connect } from 'react-redux'
-import { requestLogout } from '../epics/auth'
-import { requestPopulateTemplates, requestAddTemplate, requestUpdateTemplate } from '../epics/template'
+import { requestLogout } from '../actions/auth'
+import { requestPopulateTemplates, requestAddTemplate, requestUpdateTemplate } from '../actions/template'
 import { PAGE_TITLE } from '../constants/Generic'
 
 export default connect(
@@ -32,11 +32,11 @@ export default connect(
             onClickLogout: () => {
                 dispatch(requestLogout());
             },
-            onAddTemplate: (template, success, fail) => {
-                dispatch(requestAddTemplate(template, success, fail));
+            onAddTemplate: (template) => {
+                dispatch(requestAddTemplate(template));
             },
-            onUpdateTemplate: (template, success, fail) => {
-                dispatch(requestUpdateTemplate(template, success, fail));
+            onUpdateTemplate: (template) => {
+                dispatch(requestUpdateTemplate(template));
             }
         }
     }

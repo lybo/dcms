@@ -8,6 +8,14 @@ export function newRequest(payload, namespace) {
     };
 }
 
+export function setRequestResponse(payload, namespace) {
+    return {
+        type: types.SET_REQUEST_RESPONSE,
+        namespace,
+        payload
+    };
+}
+
 export function setErrorMessage(payload, namespace) {
     return {
         type: types.SET_ERROR_REQUEST,

@@ -37,7 +37,7 @@ const DATE_FORMAT = 'DD/MM/YYYY';
 class TemplateForm extends React.Component {
     constructor(props) {
         super(props);
-        const { template } = this.props;
+        const { template, request } = this.props;
         const fields = template ?
             template.fields :
             [];
@@ -52,29 +52,33 @@ class TemplateForm extends React.Component {
             },
             fields: fields || []
         };
+
+        this.requestNumber = request.counter;
     }
 
-    componentWillUnmount() {
+    componentWillReceiveProps(nextProps) {
+        const { request } = nextProps;
+        if (request.counter !== this.requestNumber && !request.status) {
+            redirect('/templates');
+        }
     }
 
     onSave() {
-        const { template, onAddTemplate, onUpdateTemplate } = this.props;
+        const { template, onAddTemplate, onUpdateTemplate, request } = this.props;
         const onSave = template.id !== '0' ? onUpdateTemplate : onAddTemplate;
         return (evt) => {
             evt.preventDefault();
 
+            this.requestNumber = request.counter;
             onSave({
-                    ...template,
-                    title: this.title.value,
-                    description: this.description.value,
-                    allowInsert: this.allowInsert.value,
-                    allowUpdate: this.allowUpdate.value,
-                    allowDelete: this.allowDelete.value,
-                    fields: this.state.fields,
-                },
-                () => {
-                    redirect('/templates');
-                });
+                ...template,
+                title: this.title.value,
+                description: this.description.value,
+                allowInsert: this.allowInsert.value,
+                allowUpdate: this.allowUpdate.value,
+                allowDelete: this.allowDelete.value,
+                fields: this.state.fields,
+            });
         };
     }
 

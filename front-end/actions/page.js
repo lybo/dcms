@@ -38,3 +38,35 @@ export function deletePage(data) {
     }
 }
 
+//REQUEST_ADD_PAGE
+export function requestAddPage(data) {
+    return {
+        type: types.REQUEST_ADD_PAGE,
+        payload: data
+    }
+}
+
+//REQUEST_POPULATE_PAGES
+export function requestPopulatePages(data) {
+    return {
+        type: types.REQUEST_POPULATE_PAGES,
+        payload: data
+    }
+}
+
+//REQUEST_EDIT_PAGE
+export function requestUpdatePage(data) {
+    return {
+        type: types.REQUEST_EDIT_PAGE,
+        payload: data
+    }
+}
+
+//REQUEST_DELETE_PAGE
+export function requestDeletePage(data) {
+    return {
+        type: types.REQUEST_DELETE_PAGE,
+        payload: data
+    }
+}
+

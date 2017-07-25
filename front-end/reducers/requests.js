@@ -4,26 +4,31 @@ const initialState = {
     auth: {
         counter: 0,
         status: false,
+        response: null,
         error: ''
     },
     user: {
         counter: 0,
         status: false,
+        response: null,
         error: ''
     },
     page: {
         counter: 0,
         status: false,
+        response: null,
         error: ''
     },
     template: {
         counter: 0,
         status: false,
+        response: null,
         error: ''
     },
     file: {
         counter: 0,
         status: false,
+        response: null,
         error: ''
     }
 };
@@ -42,7 +47,18 @@ const request = (state = {}, action = { type: ''}) => {
         case types.SET_ERROR_REQUEST:
             state = {
                 ...state,
-                error: action.payload
+                response: null,
+                error: action.payload,
+            }
+            return {
+                ...state
+            }
+        case types.SET_REQUEST_RESPONSE:
+            state = {
+                ...state,
+                response: action.payload,
+                error: '',
+                status: false,
             }
             return {
                 ...state
@@ -64,6 +80,13 @@ export default function requests(state = initialState, action = { type: '', name
                 ...newState
             }
         case types.SET_ERROR_REQUEST:
+            newState[key] = {
+                ...request(state[key], action)
+            }
+            return {
+                ...newState
+            }
+        case types.SET_REQUEST_RESPONSE:
             newState[key] = {
                 ...request(state[key], action)
             }

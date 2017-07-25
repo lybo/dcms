@@ -1,6 +1,6 @@
 import Login from '../components/Login/'
 import { connect } from 'react-redux'
-import { requestLogin } from '../epics/auth'
+import { requestLogin } from '../actions/auth'
 
 export default connect(
     (state) => {
@@ -10,8 +10,8 @@ export default connect(
     },
     (dispatch) => {
         return {
-            onSubmit: (email, password, success, fail) => {
-                dispatch(requestLogin(email, password, success, fail));
+            onSubmit: (email, password) => {
+                dispatch(requestLogin(email, password));
             }
         }
     }

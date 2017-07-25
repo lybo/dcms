@@ -14,6 +14,16 @@ const userRoleTranslation = {
 class UserForm extends React.Component {
     constructor(props) {
         super(props);
+
+        const { request } = this.props;
+        this.requestNumber = request.counter;
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { request } = nextProps;
+        if (request.counter !== this.requestNumber && !request.status) {
+            redirect('/users');
+        }
     }
 
     componentWillMount() {
@@ -50,9 +60,7 @@ class UserForm extends React.Component {
                 };
             }
 
-            onSave(payload, () => {
-                redirect('/users');
-            });
+            onSave(payload);
         };
     }
 

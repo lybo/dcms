@@ -1,7 +1,7 @@
 import Templates from '../components/Templates/'
 import { connect } from 'react-redux'
-import { requestLogout } from '../epics/auth'
-import { requestPopulateTemplates, requestDeleteTemplate } from '../epics/template'
+import { requestLogout } from '../actions/auth'
+import { requestPopulateTemplates, requestDeleteTemplate } from '../actions/template'
 import { PAGE_TITLE } from '../constants/Generic'
 
 export default connect(
