@@ -3,6 +3,7 @@ var del = require('del');
 var yaml = require('gulp-yaml');
 var concat_json = require("gulp-concat-json");
 var change = require('gulp-change');
+var es = require('event-stream');
 
 function reducePromises(promises = [], thenCallback = function (x) { return x }) {
     return promises.reduce(function reducer(chain, promise) {
@@ -43,20 +44,17 @@ gulp.task('conf', function() {
         return 'var content = ' + content + ';';
     }
 
-    function parseImports(content, filePath, options) {
-
+    function parseImports(content) {
         var oldLines = content.toString('utf8').split('\n');
         var newLines = [];
         var importKeyword = 'import';
         var importRawKeyword = 'import-raw';
         var regex = new RegExp("^(\\s+|)(\\w+):\\s(!(" + importKeyword + "|" + importRawKeyword + ")\\s+?(.*)(\\.ya?ml|\\.json)?)?\\s*$");
-        var space = '';
-
         for (var i = 0; i < oldLines.length; i++) {
             var line = oldLines[i];
             var match = line.match(regex);
             if (!match) {
-                newLines.push(space + line);
+                newLines.push(line);
             } else {
                 var fileName = match[3].substr(match[3].lastIndexOf('/')+1);
                 var fileNameArray = fileName.split('.');
@@ -67,17 +65,25 @@ gulp.task('conf', function() {
         return new Buffer(newLines.join('\n'));
     }
 
+    function contentTransformation() {
+        function transform(file, cb) {
+            file.contents = parseImports(file.contents);
+            cb(null, file);
+        }
+
+        return es.map(transform);
+    }
+
     function generateJSONFile(tempPath, domainName) {
         return function () {
             return new Promise(function (resolve, reject) {
                 gulp
                     .src([
                         './configuration/' + domainName + '/*.yml',
-                        './components/**/' + domainName + '.yml']
-                    )
-                    .pipe(yaml({
-                        parseContents: parseImports
-                    }))
+                        './components/**/' + domainName + '.yml'
+                    ])
+                    .pipe(contentTransformation())
+                    .pipe(yaml())
                     .pipe(concat_json('conf.js'))
                     .pipe(gulp.dest(tempPath))
                     .on('end', resolve)
