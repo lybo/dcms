@@ -151,6 +151,7 @@ class PageForm extends React.Component {
                     ...page,
                     content,
                     parentId: parentPage.id,
+                    path: [...parentPage.path, parentPage.id],
                     title: this.fields['title'],
                     published: this.isPublished.checked,
                     zIndex: page.id !== '0' ? page.zIndex : pagesNumber,
