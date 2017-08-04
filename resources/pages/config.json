@@ -9,13 +9,29 @@
 			"id": "templateId",
 			"order": 0
 		},
+		"parentId": {
+			"name": "parentId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "parentId",
+			"order": 1
+		},
+		"path": {
+			"name": "path",
+			"type": "array",
+			"typeLabel": "array",
+			"required": true,
+			"id": "path",
+			"order": 2
+		},
 		"title": {
 			"name": "title",
 			"type": "string",
 			"typeLabel": "string",
 			"required": true,
 			"id": "title",
-			"order": 1
+			"order": 3
 		},
 		"zIndex": {
 			"name": "zIndex",
@@ -23,7 +39,7 @@
 			"typeLabel": "number",
 			"required": false,
 			"id": "zIndex",
-			"order": 2
+			"order": 4
 		},
 		"published": {
 			"name": "published",
@@ -31,7 +47,7 @@
 			"typeLabel": "boolean",
 			"required": false,
 			"id": "published",
-			"order": 3
+			"order": 5
 		},
 		"zone": {
 			"name": "zone",
@@ -39,7 +55,7 @@
 			"typeLabel": "string",
 			"required": false,
 			"id": "zone",
-			"order": 4
+			"order": 6
 		},
 		"publicationStartDate": {
 			"name": "publicationStartDate",
@@ -47,7 +63,7 @@
 			"typeLabel": "string",
 			"required": false,
 			"id": "publicationStartDate",
-			"order": 5
+			"order": 7
 		},
 		"publicationEndDate": {
 			"name": "publicationEndDate",
@@ -55,7 +71,7 @@
 			"typeLabel": "string",
 			"required": false,
 			"id": "publicationEndDate",
-			"order": 6
+			"order": 8
 		},
 		"content": {
 			"name": "content",
@@ -63,7 +79,7 @@
 			"typeLabel": "object",
 			"required": false,
 			"id": "content",
-			"order": 7
+			"order": 9
 		}
 	}
 }

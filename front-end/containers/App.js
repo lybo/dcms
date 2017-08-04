@@ -46,6 +46,12 @@ const RoutePages = ({
                 <Pages />
             </Router>
             <Router pattern="/pages/:pageId" middlewares={[auth]}>
+                <Pages />
+            </Router>
+            <Router pattern="/pages/add/:parentId" middlewares={[auth]}>
+                <PageForm />
+            </Router>
+            <Router pattern="/pages/edit/:pageId" middlewares={[auth]}>
                 <PageForm />
             </Router>
             <Router pattern="/templates" middlewares={[auth]}>
@@ -61,7 +67,7 @@ const RoutePages = ({
 export default connect(
     (state) => {
         return {
-            router: state.router    
+            router: state.router
         };
     },
     (dispatch) => {

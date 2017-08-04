@@ -26,7 +26,7 @@ const SortableItem = SortableElement(({
     // );
     const template = templates.find(t => t.id === page.templateId);
     const Edit = template && template.allowUpdate >= authUserRole ? (
-        <Link url={`/pages/${page.id}`}><span className="glyphicon glyphicon-pencil"></span></Link>
+        <Link url={`/pages/edit/${page.id}`}><span className="glyphicon glyphicon-pencil"></span></Link>
     ) : (
         ''
     );
@@ -41,7 +41,9 @@ const SortableItem = SortableElement(({
     return (
         <li className="list-group-item">
             <DragHandle />
-            <span className="list-wrapper__name">{page.title}</span>
+            <span className="list-wrapper__name">
+                <Link url={`/pages/${page.id}`}>{page.title}</Link>
+            </span>
             { template ? (
                 <small className="small list-wrapper__role">{` - ${template.title} `}</small>
             ) : (
@@ -156,7 +158,7 @@ class Pages extends React.Component {
     }
 
     render() {
-        const { cmsName, router, onClickLogout, auth_user, pages, templates, onSort } = this.props;
+        const { cmsName, router, onClickLogout, auth_user, grandParentPage, parentPage, pages, templates, onSort } = this.props;
         const authUserRole = USER_ROLE.indexOf(auth_user.role);
         let selectedPage = this.state.page;
         selectedPage = selectedPage ? selectedPage : {
@@ -188,12 +190,21 @@ class Pages extends React.Component {
                             <div className="row">
                                 <div className="col-md-10">
                                     <div className="panel panel-primary">
-                                        <div className="panel-heading">
-                                            <span className="glyphicon glyphicon-list"></span>
-                                            <span>Pages</span>
+                                        <div className="panel-heading clearfix">
+                                            <div className="pull-left action-buttons">
+                                                <span className="glyphicon glyphicon-list"></span>
+                                                <span>{parentPage.title}</span>
+                                            </div>
                                             <div className="pull-right action-buttons">
                                                 <div className="btn-group pull-right">
-                                                    <Link url={'pages/0'} className="btn btn-default btn-xs">
+                                                    {parentPage.id !== '0' ? (
+                                                        <Link url={`pages/${parentPage.parentId}`} className="btn btn-default btn-xs">
+                                                            <span className="glyphicon glyphicon-chevron-left"></span>
+                                                            <span>Go to {parentPage.title}</span>
+                                                        </Link>
+                                                    ) :
+                                                    ('')}
+                                                    <Link url={`pages/add/${parentPage.id}`} className="btn btn-default btn-xs">
                                                         <span className="glyphicon glyphicon-plus"></span>
                                                         <span>Add New Page</span>
                                                     </Link>
