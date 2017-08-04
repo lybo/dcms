@@ -69,13 +69,50 @@ export function updatePage(page) {
 }
 
 export function deletePage(pageId) {
-    return new Promise(function(resolve, reject) {
+    const deletePagesByPath = (pageIds = []) => new Promise(function(resolve, reject) {
         const promiseHandler = dpdHandler(resolve, reject);
+        const query = {
+            id: {
+                $in: pageIds
+            }
+        };
         dpd.pages.del(
-            pageId,
+            query,
             promiseHandler(function dpdPagesDel() {
-                return pageId;
+                return pageIds;
             })
         );
     });
+
+    const getPagesByPath = (pageId) => new Promise(function(resolve, reject) {
+        const promiseHandler = dpdHandler(resolve, reject);
+        const query = {
+            path: {
+                $in: [pageId]
+            }
+        };
+
+        dpd.pages.get(
+            query,
+            promiseHandler(function dpdPageGet(pages) {
+                return pages;
+            })
+        );
+    });
+    return co(function* () {
+        try {
+            const pages = yield getPagesByPath(pageId);
+            const pageIds = pages.map(page => page.id);
+            pageIds.push(pageId);
+            const pageIdsResult = yield deletePagesByPath(pageIds);
+            return pageIds;
+        } catch (e) {
+            throw {
+                error: e.message || e
+            };
+        }
+    });
 }
+
+
+
