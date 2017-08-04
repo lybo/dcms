@@ -13,6 +13,22 @@ export function getPages() {
     });
 }
 
+export function getPagesByParent(parentId = '0') {
+    return new Promise(function(resolve, reject) {
+        const promiseHandler = dpdHandler(resolve, reject);
+        const query = {
+            parentId,
+        };
+
+        dpd.pages.get(
+            query,
+            promiseHandler(function dpdPageGet(pages) {
+                return pages;
+            })
+        );
+    });
+}
+
 export function addPage(page) {
     return new Promise(function(resolve, reject) {
         const promiseHandler = dpdHandler(resolve, reject);

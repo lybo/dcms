@@ -4,6 +4,8 @@ import * as types from '../constants/ActionTypes'
 const initialState = {
     id: 0,
     title: '',
+    parentId: '',
+    path: [],
     image: '',
     published: false,
     publicationStartDate: null,

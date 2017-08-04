@@ -63,17 +63,20 @@ class PageForm extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         const { request } = nextProps;
+        const { router } = this.props;
         const endOfRequest = request.counter !== this.requestNumber && !request.status;
         const validResponse = endOfRequest && request.response;
+        const isEditMode = !router.params.parentId;
         if (validResponse) {
-            this.onResponse(request.response);
+            this.onResponse(isEditMode, request.response);
         }
     }
 
-    onResponse(response) {
+    onResponse(isEditMode, response) {
         const { goToList } = this;
+        const { parentPage } = this.props;
         const { pageId } = response;
-        if (pageId !== '0' && !goToList) {
+        if (isEditMode && !goToList) {
             this.setState({
                 isSaved: true
             });
@@ -84,8 +87,8 @@ class PageForm extends React.Component {
             }, 3000);
             return;
         }
-        !goToList && redirect(`/pages/${pageId}`);
-        goToList && redirect(`/pages`);
+        !goToList && redirect(`/pages/edit/${pageId}`);
+        goToList && redirect(`/pages/${parentPage.id}`);
     }
 
     onSubmit(evt) {
@@ -97,7 +100,7 @@ class PageForm extends React.Component {
     }
 
     onSave(goToList) {
-        const { page, onAddPage, onUpdatePage, pagesNumber, onLoadPages, request } = this.props;
+        const { parentPage, page, onAddPage, onUpdatePage, pagesNumber, onLoadPages, request } = this.props;
         const onSave = page.id !== '0' ? onUpdatePage : onAddPage;
         return (evt) => {
             evt.preventDefault();
@@ -147,6 +150,7 @@ class PageForm extends React.Component {
             onSave({
                     ...page,
                     content,
+                    parentId: parentPage.id,
                     title: this.fields['title'],
                     published: this.isPublished.checked,
                     zIndex: page.id !== '0' ? page.zIndex : pagesNumber,
