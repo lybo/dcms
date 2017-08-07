@@ -3,31 +3,32 @@ import { connect } from 'react-redux'
 import { requestLogout } from '../actions/auth'
 import { requestPopulatePages, requestAddPage, requestUpdatePage } from '../actions/page'
 import { PAGE_TITLE } from '../constants/Generic'
+import { getPage } from '../models/page'
 
 
 function getEmptyPage(title = '') {
-    return {
+    return getPage({
         title,
         id: '0',
-        content: {},
         parentId: '0',
         path: ['0'],
-        templateId: '',
-    };
+    });
 }
 
 export default connect(
     (state) => {
         const { pageId } = state.router.params;
-        const page = pageId && pageId !== '0' ?
-            state.pages.find((pageItem) => pageItem.id === pageId) :
+        const isEditMode = pageId && pageId !== '0';
+        const page = isEditMode && state.pages.byId[pageId] ?
+            state.pages.byId[pageId] :
             getEmptyPage();
 
         const parentId = state.router.params.parentId ?
             state.router.params.parentId :
             page.parentId;
 
-        const parentPage = state.pages.find((page) => page.id === parentId) || getEmptyPage('Pages');
+        const parentPageId = (state.pages.allIds).find((pageId) => state.pages.byId[pageId].id === parentId);
+        const parentPage = state.pages.byId[parentPageId] || getEmptyPage('Pages');
 
         return {
             router: state.router,

@@ -1,18 +1,8 @@
 import { ADD_PAGE, EDIT_PAGE } from '../constants/ActionTypes';
 import * as types from '../constants/ActionTypes'
+import { getPage } from '../models/page'
 
-const initialState = {
-    id: 0,
-    title: '',
-    parentId: '',
-    path: [],
-    image: '',
-    published: false,
-    publicationStartDate: null,
-    publicationEndDate: null,
-    zone: '',
-    content: {},
-};
+const initialState = getPage();
 
 export default function(state = initialState, action = { type: '', payload: {} }) {
     switch (action.type) {
@@ -22,8 +12,8 @@ export default function(state = initialState, action = { type: '', payload: {} }
         case types.EDIT_PAGE:
             return Object.assign({}, state, action.payload);
 
-        default: 
+        default:
             return state;
-    }   
+    }
 };
 

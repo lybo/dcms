@@ -29,6 +29,24 @@ export function getPagesByParent(parentId = '0') {
     });
 }
 
+export function getPagesByPath(pageId) {
+    return new Promise(function(resolve, reject) {
+        const promiseHandler = dpdHandler(resolve, reject);
+        const query = {
+            path: {
+                $in: [pageId]
+            }
+        };
+
+        dpd.pages.get(
+            query,
+            promiseHandler(function dpdPageGet(pages) {
+                return pages;
+            })
+        );
+    });
+}
+
 export function addPage(page) {
     return new Promise(function(resolve, reject) {
         const promiseHandler = dpdHandler(resolve, reject);
@@ -68,8 +86,8 @@ export function updatePage(page) {
     });
 }
 
-export function deletePage(pageId) {
-    const deletePagesByPath = (pageIds = []) => new Promise(function(resolve, reject) {
+export function deletePagesByPath(pageIds = []) {
+    return new Promise(function(resolve, reject) {
         const promiseHandler = dpdHandler(resolve, reject);
         const query = {
             id: {
@@ -82,30 +100,17 @@ export function deletePage(pageId) {
                 return pageIds;
             })
         );
-    });
+    })
+}
 
-    const getPagesByPath = (pageId) => new Promise(function(resolve, reject) {
-        const promiseHandler = dpdHandler(resolve, reject);
-        const query = {
-            path: {
-                $in: [pageId]
-            }
-        };
-
-        dpd.pages.get(
-            query,
-            promiseHandler(function dpdPageGet(pages) {
-                return pages;
-            })
-        );
-    });
+export function deletePage(pageId) {
     return co(function* () {
         try {
             const pages = yield getPagesByPath(pageId);
-            const pageIds = pages.map(page => page.id);
-            pageIds.push(pageId);
-            const pageIdsResult = yield deletePagesByPath(pageIds);
-            return pageIds;
+            const pageIds = (pages || []).map(page => page.id);
+            const allPageIds = [...pageIds, pageId];
+            const pageIdsResult = yield deletePagesByPath(allPageIds);
+            return pageIds || [];
         } catch (e) {
             throw {
                 error: e.message || e
@@ -113,6 +118,3 @@ export function deletePage(pageId) {
         }
     });
 }
-
-
-
