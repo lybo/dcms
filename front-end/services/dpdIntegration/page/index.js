@@ -1,5 +1,6 @@
 import co from 'co';
 import { dpdHandler } from '../utils.js';
+import * as model from '../../../models/page'
 
 export function getPages() {
     return new Promise(function(resolve, reject) {
@@ -8,6 +9,26 @@ export function getPages() {
         dpd.pages.get(
             promiseHandler(function dpdPageGet(pages) {
                 return pages;
+            })
+        );
+    });
+}
+
+export function getPageById(pageId = '0') {
+    return new Promise(function(resolve, reject) {
+        if (pageId === '0') {
+            resolve(model.getPage());
+        }
+
+        const promiseHandler = dpdHandler(resolve, reject);
+        const query = {
+            id: pageId,
+        };
+
+        dpd.pages.get(
+            query,
+            promiseHandler(function dpdPageGet(page) {
+                return page;
             })
         );
     });
@@ -26,6 +47,43 @@ export function getPagesByParent(parentId = '0') {
                 return pages;
             })
         );
+    });
+}
+
+export function getPagesByIds(pageIds = []) {
+    return new Promise(function(resolve, reject) {
+        const promiseHandler = dpdHandler(resolve, reject);
+        const query = {
+            id: {
+                $in: pageIds
+            },
+        };
+
+        dpd.pages.get(
+            query,
+            promiseHandler(function dpdPageGet(pages) {
+                return pages;
+            })
+        );
+    });
+}
+
+export function getPagesByParentAndPath(parentId) {
+    return co(function* () {
+        try {
+            const parentPage = yield getPageById(parentId);
+            const pages = yield getPagesByParent(parentId);
+            const pathPages = yield getPagesByIds(parentPage.path);
+            return {
+                parentPage,
+                pages: pages || [],
+                pathPages: pathPages || [],
+            };
+        } catch (e) {
+            throw {
+                error: e.message || e
+            };
+        }
     });
 }
 
@@ -110,7 +168,7 @@ export function deletePage(pageId) {
             const pageIds = (pages || []).map(page => page.id);
             const allPageIds = [...pageIds, pageId];
             const pageIdsResult = yield deletePagesByPath(allPageIds);
-            return pageIds || [];
+            return allPageIds;
         } catch (e) {
             throw {
                 error: e.message || e

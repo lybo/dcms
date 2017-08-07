@@ -7,19 +7,18 @@ import { getPage } from '../models/page'
 
 export default connect(
     (state) => {
-        const parentId = state.router.params.pageId || '0';
-        const pageIds = state.pages.allIds.filter((pageId) => state.pages.byId[pageId].parentId === parentId);
-        const pages = pageIds.map((pageId) => state.pages.byId[pageId]);
+        const { parentId, ids, pathIds } = state.uiPages;
+        const { byId } = state.pages;
+        const pageIds = ids.filter((pageId) => byId[pageId].parentId === parentId);
+        const pages = pageIds.map((pageId) => byId[pageId]);
+        const pathPages = pathIds.map((pageId) => byId[pageId]);
         const root = getPage();
-        const parentPageId = (state.pages.allIds).find((pageId) => state.pages.byId[pageId].id === parentId);
-        const parentPage = state.pages.byId[parentPageId] || root;
-        const grandParentPage = root;
-        // const grandParentPage = (state.pages || []).find((page) => page.id === parentPage.parentId) || root;
+        const parentPage = byId[parentId] || root;
 
         return {
             pages,
             parentPage,
-            grandParentPage,
+            pathPages,
             router: state.router,
             auth_user: state.auth_user,
             templates: state.templates || [],

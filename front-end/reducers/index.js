@@ -6,6 +6,7 @@ import templates from './templates'
 import pages from './pages'
 import files from './files'
 import requests from './requests'
+import uiPages from './uiPages'
 
 export default combineReducers({
     router: router.reducer,
@@ -14,5 +15,6 @@ export default combineReducers({
     pages,
     templates,
     files,
-    requests
+    requests,
+    uiPages,
 });

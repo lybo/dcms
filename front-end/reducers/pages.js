@@ -1,10 +1,14 @@
 import { ADD_PAGE, DELETE_PAGE, EDIT_PAGE, POPULATE_PAGES } from '../constants/ActionTypes';
 import page from './page';
+import * as model from '../models/page';
 
 const initialState = {
-    byId: {},
-    allIds: [],
-    idsByParent: [],
+    byId: {
+        '0': model.getPage({
+            title: 'Pages',
+        })
+    },
+    allIds: ['0'],
 };
 
 function normalizeArray(entities = []) {
@@ -14,6 +18,12 @@ function normalizeArray(entities = []) {
         ids.push(entity.id);
         byId[entity.id] = entity;
     });
+
+    //TODO: fix the root
+    byId['0'] = model.getPage({
+        title: 'Pages',
+    });
+    ids.push('0');
 
     return {
         byId,
@@ -28,36 +38,50 @@ export default function pages(state = initialState, action = { type: '', payload
 
     switch (action.type) {
         case POPULATE_PAGES:
-            const { byId, ids } = normalizeArray(action.payload);
+            const allPages = [].concat(
+                action.payload.pages || [],
+                action.payload.parentPage || [],
+                action.payload.pathPages || [],
+            );
+            const { byId, ids } = normalizeArray(allPages);
+
             return {
                 byId,
                 allIds: ids,
             };
 
         case ADD_PAGE:
-            state.byId[action.payload.id] = page(undefined, action);
             return {
-                byId: state.byId,
+                ...state,
                 allIds: [
                     action.payload.id,
                     ...state.allIds
                 ],
+                byId: {
+                    ...state.byId,
+                    [action.payload.id]: page(undefined, action)
+                }
             };
 
         case DELETE_PAGE:
             const pageIds = action.payload;
-            console.log(pageIds);
-            pageIds.forEach((id) => delete state.byId[id])
+            pageIds.forEach((id) => delete state.byId[id]);
             return {
-                byId: state.byId,
-                allIds: state.allIds.filter(page =>
-                    !pageIds.includes(page.id)
+                ...state,
+                allIds: state.allIds.filter(
+                    pageId => !pageIds.includes(pageId)
                 ),
+                byId: state.byId,
             };
 
         case EDIT_PAGE:
-            state.byId[action.payload.id] = page(undefined, action);
-            return state;
+            return {
+                ...state,
+                byId: {
+                    ...state.byId,
+                    [action.payload.id]: page(undefined, action),
+                }
+            };
 
         default:
             return state

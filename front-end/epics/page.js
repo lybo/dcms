@@ -17,7 +17,7 @@ export const requestPopulatePages = (action$, store) => {
             //Concat 2 observables so they fire sequentially
             Observable.concat(
                 Observable.of(requests.newRequest(true, requestName)),
-                Observable.fromPromise(api.getPages(payload))
+                Observable.fromPromise(api.getPagesByParent(store.getState().uiPages.parentId))
                     .flatMap(data =>
                         //Concat 2 observables so they fire sequentially
                         Observable.concat(
