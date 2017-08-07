@@ -13,7 +13,9 @@ const getSanitizedProps = (data) => {
     const dataProps = Object.keys(data);
     const additionalProps = dataProps.filter((prop) => !pageProps.includes(prop));
 
-    console.log('Page model has additional props', additionalProps);
+    if (additionalProps.length) {
+        console.log('Page model has additional props', additionalProps);
+    }
 
     additionalProps.forEach(prop => delete data[prop]);
 

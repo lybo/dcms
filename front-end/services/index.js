@@ -48,7 +48,7 @@ export function getPages() {
 }
 
 export function getPagesByParent(parentId) {
-    return integration.getPagesByParent(parentId);
+    return integration.getPagesByParentAndPath(parentId);
 }
 
 export function addPage(page) {

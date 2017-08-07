@@ -9,9 +9,6 @@ import { getPage } from '../models/page'
 function getEmptyPage(title = '') {
     return getPage({
         title,
-        id: '0',
-        parentId: '0',
-        path: ['0'],
     });
 }
 

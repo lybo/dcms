@@ -132,6 +132,13 @@ class Pages extends React.Component {
         onLoadPages();
     }
 
+    componentWillReceiveProps(nextProps) {
+        const { onLoadPages, parentPage } = this.props;
+        if (nextProps.parentPage.id !== parentPage.id) {
+            onLoadPages();
+        }
+    }
+
     onDelete(pageId) {
         const { pages } = this.props;
         return (evt) => {
@@ -158,7 +165,7 @@ class Pages extends React.Component {
     }
 
     render() {
-        const { cmsName, router, onClickLogout, auth_user, grandParentPage, parentPage, pages, templates, onSort } = this.props;
+        const { cmsName, router, onClickLogout, auth_user, pathPages, parentPage, pages, templates, onSort } = this.props;
         const authUserRole = USER_ROLE.indexOf(auth_user.role);
         let selectedPage = this.state.page;
         selectedPage = selectedPage ? selectedPage : {
@@ -193,6 +200,13 @@ class Pages extends React.Component {
                                         <div className="panel-heading clearfix">
                                             <div className="pull-left action-buttons">
                                                 <span className="glyphicon glyphicon-list"></span>
+                                                {pathPages.map(page => {
+                                                    return (
+                                                        <Link url={`pages/${page.id}`} className="btn btn-default btn-xs" key={`${page.id}-path`}>
+                                                            <span>{`${page.title} /`}</span>
+                                                        </Link>
+                                                    );
+                                                })}
                                                 <span>{parentPage.title}</span>
                                             </div>
                                             <div className="pull-right action-buttons">
