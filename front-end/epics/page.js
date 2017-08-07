@@ -88,12 +88,12 @@ export const requestDeletePage = (action$, store) => {
             Observable.concat(
                 Observable.of(requests.newRequest(true, requestName)),
                 Observable.fromPromise(api.deletePage(pageId))
-                    .flatMap(data =>
+                    .flatMap(pageIds =>
                         //Concat 2 observables so they fire sequentially
                         Observable.concat(
                             Observable.of(requests.setErrorMessage('', requestName)),
                             Observable.of(requests.newRequest(false, requestName)),
-                            Observable.of(actions.deletePage(pageId)),
+                            Observable.of(actions.deletePage(pageIds)),
                         )
                     )
                     .catch(pageErrorHandler)

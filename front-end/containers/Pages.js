@@ -3,18 +3,19 @@ import { connect } from 'react-redux'
 import { requestLogout } from '../actions/auth'
 import { requestPopulatePages, requestUpdatePage, requestDeletePage } from '../actions/page'
 import { PAGE_TITLE } from '../constants/Generic'
+import { getPage } from '../models/page'
 
 export default connect(
     (state) => {
         const parentId = state.router.params.pageId || '0';
-        const pages = (state.pages || []).filter((page) => page.parentId === parentId);
-        const root = {
-            id: '0',
-            title: 'Pages',
-            parentId: '0'
-        };
-        const parentPage = (state.pages || []).find((page) => page.id === parentId) || root;
-        const grandParentPage = (state.pages || []).find((page) => page.id === parentPage.parentId) || root;
+        const pageIds = state.pages.allIds.filter((pageId) => state.pages.byId[pageId].parentId === parentId);
+        const pages = pageIds.map((pageId) => state.pages.byId[pageId]);
+        const root = getPage();
+        const parentPageId = (state.pages.allIds).find((pageId) => state.pages.byId[pageId].id === parentId);
+        const parentPage = state.pages.byId[parentPageId] || root;
+        const grandParentPage = root;
+        // const grandParentPage = (state.pages || []).find((page) => page.id === parentPage.parentId) || root;
+
         return {
             pages,
             parentPage,
