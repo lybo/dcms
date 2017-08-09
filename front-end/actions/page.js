@@ -14,6 +14,14 @@ export function populatePages(data) {
     }
 }
 
+//POPULATE_MAIN_PAGES
+export function populateMainPages(data) {
+    return {
+        type: types.POPULATE_MAIN_PAGES,
+        payload: data
+    }
+}
+
 //ADD_PAGE
 export function addPage(data) {
     return {
@@ -43,6 +51,13 @@ export function requestAddPage(data) {
     return {
         type: types.REQUEST_ADD_PAGE,
         payload: data
+    }
+}
+
+//REQUEST_GET_MAIN_PAGES
+export function requestGetMainPages() {
+    return {
+        type: types.REQUEST_GET_MAIN_PAGES
     }
 }
 

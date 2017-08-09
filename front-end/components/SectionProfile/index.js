@@ -12,11 +12,26 @@ class SectionProfile extends React.Component {
     }
 
     render() {
-        const { cmsName, router, onClickLogout, auth_user, request, onAddUser, onUpdateUser } = this.props;
+        const {
+            cmsName,
+            router,
+            onClickLogout,
+            auth_user,
+            request,
+            onAddUser,
+            onUpdateUser,
+            mainPages,
+        } = this.props;
         const authorizedUserRoles = getAuthorizedUserRoles(auth_user.role);
 
         return (
-            <PageLayout cmsName={cmsName} router={router} onClickLogout={onClickLogout} auth_user={auth_user} >
+            <PageLayout
+                cmsName={cmsName}
+                router={router}
+                onClickLogout={onClickLogout}
+                auth_user={auth_user}
+                mainPages={mainPages}
+            >
                 <UserForm user={auth_user}
                     onAddUser={onAddUser}
                     onUpdateUser={onUpdateUser}

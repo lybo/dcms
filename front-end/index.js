@@ -7,12 +7,14 @@ import configureStore from './store/configureStore'
 import router from 'redux-router-director'
 import DevTools from './containers/DevTools'
 import { requestPopulateTemplates } from './actions/template'
+import { requestGetMainPages } from './actions/page'
 import 'rxjs'
 
 const store = configureStore()
 router.setStore(store)
 
 store.dispatch(requestPopulateTemplates());
+store.dispatch(requestGetMainPages());
 
 render(
     <Provider store={store}>

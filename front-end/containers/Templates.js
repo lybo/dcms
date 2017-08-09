@@ -11,6 +11,7 @@ export default connect(
             auth_user: state.auth_user,
             templates: state.templates || [],
             cmsName: PAGE_TITLE,
+            mainPages: state.pages.mainNodeIds.map(id => state.pages.byId[id]),
         };
     },
     (dispatch) => {

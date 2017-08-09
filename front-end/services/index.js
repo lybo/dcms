@@ -47,6 +47,10 @@ export function getPages() {
     return integration.getPages();
 }
 
+export function getPagesByMainNode() {
+    return integration.getPagesByMainNode();
+}
+
 export function getPagesByParent(parentId) {
     return integration.getPagesByParentAndPath(parentId);
 }

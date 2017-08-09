@@ -68,6 +68,22 @@ export function getPagesByIds(pageIds = []) {
     });
 }
 
+export function getPagesByMainNode() {
+    return new Promise(function(resolve, reject) {
+        const promiseHandler = dpdHandler(resolve, reject);
+        const query = {
+            isMainNode: true,
+        };
+
+        dpd.pages.get(
+            query,
+            promiseHandler(function dpdPagesByMainNode(pages) {
+                return pages;
+            })
+        );
+    });
+}
+
 export function getPagesByParentAndPath(parentId) {
     return co(function* () {
         try {

@@ -180,7 +180,14 @@ class TemplateForm extends React.Component {
     }
 
     render() {
-        const { cmsName, router, onClickLogout, auth_user, template, request } = this.props;
+        const { cmsName,
+            router,
+            onClickLogout,
+            auth_user,
+            template,
+            request,
+            mainPages,
+        } = this.props;
 
         const FieldAdd = (
             <div className="form-inline clearfix">
@@ -328,7 +335,12 @@ class TemplateForm extends React.Component {
         );
 
         return (
-            <PageLayout cmsName={cmsName} router={router} onClickLogout={onClickLogout} auth_user={auth_user} >
+            <PageLayout cmsName={cmsName}
+                router={router}
+                onClickLogout={onClickLogout}
+                auth_user={auth_user}
+                mainPages={mainPages}
+            >
                 {Form}
             </PageLayout>
          );

@@ -11,13 +11,13 @@ class PageLayout extends React.Component {
     }
 
     render() {
-        const { cmsName, router, onClickLogout, auth_user, page, request, children } = this.props;
+        const { cmsName, router, onClickLogout, auth_user, page, request, children, mainPages } = this.props;
 
         return (
             <div>
                 <Header onClickLogout={onClickLogout} user={auth_user} logo={cmsName} />
                 <div className="container-fluid main-container">
-                    <Sidemenu router={router} auth_user={auth_user}/>
+                    <Sidemenu router={router} auth_user={auth_user} mainPages={mainPages}/>
                     <div className="col-md-10 content">
 
                         {children}

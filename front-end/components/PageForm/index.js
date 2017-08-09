@@ -154,6 +154,7 @@ class PageForm extends React.Component {
                     path: [...parentPage.path, parentPage.id],
                     title: this.fields['title'],
                     published: this.isPublished.checked,
+                    isMainNode: this.isMainNode.checked,
                     zIndex: page.id !== '0' ? page.zIndex : pagesNumber,
                     // publicationStartDate: moment(this.startInput.value, DATE_FORMAT).unix(),
                     // publicationEndDate: moment(this.endInput.value, DATE_FORMAT).unix(),
@@ -172,7 +173,7 @@ class PageForm extends React.Component {
     }
 
     render() {
-        const { cmsName, router, onClickLogout, auth_user, page, request, templates } = this.props;
+        const { cmsName, router, onClickLogout, auth_user, page, request, templates, mainPages } = this.props;
         const { selectedTemplate, isValid, isSaved } = this.state;
 
         const templateFields = selectedTemplate ? (
@@ -249,6 +250,13 @@ class PageForm extends React.Component {
                                 <label htmlFor="isPublished">
                                     <input ref="isPublished" ref={(ref) => this.isPublished = ref} defaultChecked={page.published || false} type="checkbox" className="" name="isPublished" id="isPublished"/>
                                     isPublished
+                                </label>
+                            </div>
+
+                            <div className="checkbox">
+                                <label htmlFor="isMainNode">
+                                    <input ref="isMainNode" ref={(ref) => this.isMainNode = ref} defaultChecked={page.isMainNode || false} type="checkbox" className="" name="isMainNode" id="isMainNode"/>
+                                    isMainNode
                                 </label>
                             </div>
 {/*
@@ -347,7 +355,13 @@ class PageForm extends React.Component {
         );
 
         return (
-            <PageLayout cmsName={cmsName} router={router} onClickLogout={onClickLogout} auth_user={auth_user} >
+            <PageLayout
+                cmsName={cmsName}
+                router={router}
+                onClickLogout={onClickLogout}
+                auth_user={auth_user}
+                mainPages={mainPages}
+            >
                 {Form}
             </PageLayout>
          );

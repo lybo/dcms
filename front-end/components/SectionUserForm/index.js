@@ -12,13 +12,29 @@ class SectionUserForm extends React.Component {
     }
 
     render() {
-        const { cmsName, router, onClickLogout, auth_user, user, request, onAddUser, onUpdateUser } = this.props;
+        const {
+            cmsName,
+            router,
+            onClickLogout,
+            auth_user,
+            user,
+            request,
+            onAddUser,
+            onUpdateUser,
+            mainPages,
+        } = this.props;
 
         const isNewUser = user.id === '0';
         const authorizedUserRoles = getAuthorizedUserRoles(auth_user.role);
 
         return (
-            <PageLayout cmsName={cmsName} router={router} onClickLogout={onClickLogout} auth_user={auth_user} >
+            <PageLayout
+                cmsName={cmsName}
+                router={router}
+                onClickLogout={onClickLogout}
+                auth_user={auth_user}
+                mainPages={mainPages}
+            >
                 <UserForm user={user}
                     onAddUser={onAddUser}
                     onUpdateUser={onUpdateUser}

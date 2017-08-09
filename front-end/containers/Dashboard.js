@@ -8,6 +8,7 @@ export default connect(
         return {
             auth_user: state.auth_user,
             cmsName: PAGE_TITLE,
+            mainPages: state.pages.mainNodeIds.map(id => state.pages.byId[id]),
         };
     },
     (dispatch) => {

@@ -8,6 +8,27 @@ import { Observable } from 'rxjs/Observable'
 const requestName = 'page';
 const pageErrorHandler = errorHandler(requestName);
 
+//GET_MAIN_PAGES
+export const requestGetMainPages = (action$, store) => {
+    return action$
+        .ofType(types.REQUEST_GET_MAIN_PAGES)
+        .flatMap(() =>
+            //Concat 2 observables so they fire sequentially
+            Observable.concat(
+                Observable.of(requests.newRequest(true, requestName)),
+                Observable.fromPromise(api.getPagesByMainNode())
+                    .flatMap(data =>
+                        //Concat 2 observables so they fire sequentially
+                        Observable.concat(
+                            Observable.of(actions.populateMainPages(data)),
+                            Observable.of(requests.setRequestResponse(null, requestName)),
+                        )
+                    )
+                    .catch(pageErrorHandler)
+            )
+        );
+};
+
 //POPULATE_PAGES
 export const requestPopulatePages = (action$, store) => {
     return action$
