@@ -33,13 +33,21 @@
 			"id": "title",
 			"order": 3
 		},
+		"isMainNode": {
+			"name": "isMainNode",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": false,
+			"id": "isMainNode",
+			"order": 4
+		},
 		"zIndex": {
 			"name": "zIndex",
 			"type": "number",
 			"typeLabel": "number",
 			"required": false,
 			"id": "zIndex",
-			"order": 4
+			"order": 5
 		},
 		"published": {
 			"name": "published",
@@ -47,7 +55,7 @@
 			"typeLabel": "boolean",
 			"required": false,
 			"id": "published",
-			"order": 5
+			"order": 6
 		},
 		"zone": {
 			"name": "zone",
@@ -55,7 +63,7 @@
 			"typeLabel": "string",
 			"required": false,
 			"id": "zone",
-			"order": 6
+			"order": 7
 		},
 		"publicationStartDate": {
 			"name": "publicationStartDate",
@@ -63,7 +71,7 @@
 			"typeLabel": "string",
 			"required": false,
 			"id": "publicationStartDate",
-			"order": 7
+			"order": 8
 		},
 		"publicationEndDate": {
 			"name": "publicationEndDate",
@@ -71,7 +79,7 @@
 			"typeLabel": "string",
 			"required": false,
 			"id": "publicationEndDate",
-			"order": 8
+			"order": 9
 		},
 		"content": {
 			"name": "content",
@@ -79,7 +87,7 @@
 			"typeLabel": "object",
 			"required": false,
 			"id": "content",
-			"order": 9
+			"order": 10
 		}
 	}
 }

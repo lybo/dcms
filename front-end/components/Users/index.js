@@ -46,7 +46,13 @@ class Users extends React.Component {
     }
 
     render() {
-        const { cmsName, router, onClickLogout, auth_user, users } = this.props;
+        const { cmsName,
+            router,
+            onClickLogout,
+            auth_user,
+            users,
+            mainPages,
+        } = this.props;
         let selectedUser = this.state.user;
         selectedUser = selectedUser ? selectedUser : {
             id: 0,
@@ -54,7 +60,13 @@ class Users extends React.Component {
         };
 
         return (
-            <PageLayout cmsName={cmsName} router={router} onClickLogout={onClickLogout} auth_user={auth_user} >
+            <PageLayout
+                cmsName={cmsName}
+                router={router}
+                onClickLogout={onClickLogout}
+                auth_user={auth_user}
+                mainPages={mainPages}
+            >
                 <div className="modal fade bs-example-modal-sm" tabIndex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="confirm">
                     <div className="modal-dialog modal-sm" role="document">
                         <div className="modal-content">

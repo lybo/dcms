@@ -165,7 +165,17 @@ class Pages extends React.Component {
     }
 
     render() {
-        const { cmsName, router, onClickLogout, auth_user, pathPages, parentPage, pages, templates, onSort } = this.props;
+        const { cmsName,
+            router,
+            onClickLogout,
+            auth_user,
+            pathPages,
+            parentPage,
+            pages,
+            templates,
+            onSort,
+            mainPages,
+        } = this.props;
         const authUserRole = USER_ROLE.indexOf(auth_user.role);
         let selectedPage = this.state.page;
         selectedPage = selectedPage ? selectedPage : {
@@ -174,7 +184,13 @@ class Pages extends React.Component {
         };
 
         return (
-            <PageLayout cmsName={cmsName} router={router} onClickLogout={onClickLogout} auth_user={auth_user} >
+            <PageLayout
+                cmsName={cmsName}
+                router={router}
+                onClickLogout={onClickLogout}
+                auth_user={auth_user}
+                mainPages={mainPages}
+            >
                     <div className="col-md-10 content">
                         <div className="modal fade bs-example-modal-sm" tabIndex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="confirm">
                             <div className="modal-dialog modal-sm" role="document">

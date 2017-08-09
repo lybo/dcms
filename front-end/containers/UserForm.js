@@ -23,6 +23,7 @@ export default connect(
             user,
             request: state.requests.user,
             cmsName: PAGE_TITLE,
+            mainPages: state.pages.mainNodeIds.map(id => state.pages.byId[id]),
         };
     },
     (dispatch) => {

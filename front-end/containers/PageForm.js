@@ -30,12 +30,13 @@ export default connect(
         return {
             router: state.router,
             auth_user: state.auth_user,
-            pagesNumber: state.pages.length,
+            pagesNumber: state.uiPages.ids.length,
             page,
             parentPage,
             request: state.requests.page,
             templates: state.templates,
             cmsName: PAGE_TITLE,
+            mainPages: state.pages.mainNodeIds.map(id => state.pages.byId[id]),
         };
     },
     (dispatch) => {

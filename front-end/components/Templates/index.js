@@ -45,7 +45,14 @@ class Templates extends React.Component {
     }
 
     render() {
-        const { cmsName, router, onClickLogout, auth_user, templates } = this.props;
+        const {
+            cmsName,
+            router,
+            onClickLogout,
+            auth_user,
+            templates,
+            mainPages,
+        } = this.props;
         let selectedTemplate = this.state.template;
         selectedTemplate = selectedTemplate ? selectedTemplate : {
             id: 0,
@@ -53,7 +60,12 @@ class Templates extends React.Component {
         };
 
         return (
-            <PageLayout cmsName={cmsName} router={router} onClickLogout={onClickLogout} auth_user={auth_user} >
+            <PageLayout cmsName={cmsName}
+                router={router}
+                onClickLogout={onClickLogout}
+                auth_user={auth_user}
+                mainPages={mainPages}
+            >
                     <div className="col-md-10 content">
                         <div className="modal fade bs-example-modal-sm" tabIndex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="confirm">
                             <div className="modal-dialog modal-sm" role="document">

@@ -9,8 +9,9 @@ class Sidemenu extends React.Component {
     }
 
     render() {
-        const { onLogout, router, auth_user } = this.props;
+        const { onLogout, router, auth_user, mainPages } = this.props;
         const pattern = router && router.pattern ? router.pattern : '/';
+        const pageId = router && router.params.pageId ? router.params.pageId : null;
 
         return (
             <div className="col-md-2 sidebar">
@@ -33,6 +34,15 @@ class Sidemenu extends React.Component {
                                             ''
                                         )}
                                         <li className={pattern.indexOf('page') !== -1 ? 'active' : ''}><Link url={'/pages'}><span className="glyphicon glyphicon-file"></span> <span>{'Pages'}</span></Link></li>
+                                        {mainPages.map(page => (
+                                            <li key={`main-page-${page.id}`}
+                                                className={pageId === page.id ? 'active' : ''}
+                                            >
+                                                <Link url={`/pages/${page.id}`}>
+                                                    <span>* </span><span className="glyphicon glyphicon-file"></span> <span>{page.title}</span>
+                                                </Link>
+                                            </li>
+                                        ))}
                                         <li className="panel panel-default" id="dropdown">
                                             <a data-toggle="collapse" href="#dropdown-lvl1">
                                                 <span className="glyphicon glyphicon-user"></span> Sub Level <span className="caret"></span>

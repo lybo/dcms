@@ -1,10 +1,13 @@
 const page = {
     id: '0',
     title: '',
+    templateId: 0,
     parentId: '',
     path: [],
     published: false,
+    isMainNode: false,
     content: {},
+    zIndex: 0,
 };
 
 const pageProps = Object.keys(page);

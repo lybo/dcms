@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import PageLayout from '../PageLayout/'
 import Spinner from '../Spinner/'
 import { redirect } from 'redux-router-director'
 import '!style!css!less!./style.less'
